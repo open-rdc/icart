@@ -6,7 +6,6 @@
   <param name="base_frame" value="base_frame"/> 
   <param name="odom_frame" value="odom"/>
   
-  <node pkg="hokuyo_node" type="hokuyo_node" name="hokuyo_node"/>
   <node pkg="tf" type="static_transform_publisher" name="map_2_odom" args="0 0 0 0 0 0 /map /odom 100"/>
   <node pkg="tf" type="static_transform_publisher" name="odom_2_base_footprint" args="0 0 0 0 0 0 /odom /base_footprint 100"/>
   <node pkg="tf" type="static_transform_publisher" name="base_footprint_2_base_link" args="0 0 0 0 0 0 /base_footprint /base_link 100"/> 
@@ -17,7 +16,9 @@
 
   <node pkg="rviz" type="rviz" name="rviz" args="-d $(find t_frog_navigation)/rviz_cfg/rviz_cfg.rviz"/>
 
-  <include file="$(find t_frog_navigation)/launch/default_mapping.launch"/> 
+  <include file="$(find t_frog_navigation)/launch/default_mapping.launch">
+    <arg name="scan_topic" value="/t_frog/laser/scan"/>
+  </include> 
   <include file="$(find hector_geotiff)/launch/geotiff_mapper.launch"/>
 
 </launch>
