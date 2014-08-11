@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+
+<launch>
+  <master auto="start"/>
+  <include file="$(find t_frog_slam)/launch/hector_hokuyo.launch"/>
+  <include file="$(find t_frog_navigation)/launch/move_base.launch"/>
+</launch>
