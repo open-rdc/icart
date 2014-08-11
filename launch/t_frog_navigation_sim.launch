@@ -2,7 +2,9 @@
 
 <launch>
   <master auto="start"/>
-  <include file="$(find t_frog_navigation)/launch/move_base.launch"/>
+  <include file="$(find t_frog_navigation)/launch/move_base.launch">
+    <arg name="odom_frame" value="t_frog/odom"/>
+  </include>
   <include file="$(find t_frog_gazebo)/launch/t_frog_world.launch"/>
   <include file="$(find t_frog_slam)/launch/hector_slam.launch"/>
 </launch>
