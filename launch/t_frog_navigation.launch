@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+
+<launch>
+  <arg name="scan_topic" default="scan"/>
+  <arg name="scan_frame" default="/hokuyo_link"/>
+  <arg name="scan_dev" default="/dev/sensors/hokuyo_urg"/>
+
+  <master auto="start"/>
+  <include file="$(find t_frog_driver)/launch/t_frog_drive.launch" />
+
+  <include file="$(find t_frog_navigation)/launch/move_base.launch">
+    <arg name="odom_frame" value="odom"/>
+    <arg name="cmd_vel" value="cmd_vel"/>
+  </include>
+
+  <node pkg="hokuyo_node" type="hokuyo_node" name="hokuyo_node">
+    <param name="frame_id" value="$(arg scan_frame)"/>
+    <param name="port" value="$(arg scan_dev)"/>
+  </node>
+
+  <include file="$(find t_frog_slam)/launch/gmapping.launch">
+    <arg name="scan_topic" value="$(arg scan_topic)"/>
+  </include>
+</launch>
