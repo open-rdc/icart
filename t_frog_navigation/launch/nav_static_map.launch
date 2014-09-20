@@ -4,8 +4,10 @@
   <arg name="scan_topic" default="scan"/>
   <arg name="scan_frame" default="/hokuyo_link"/>
   <arg name="scan_dev" default="/dev/sensors/hokuyo_urg"/>
+  <arg name="map_file" default="$(find t_frog_slam)/map/mymap.yaml"/>
 
   <master auto="start"/>
+  <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)"/>
   <include file="$(find t_frog_driver)/launch/t_frog_drive.launch" />
 
   <include file="$(find t_frog_navigation)/launch/move_base.launch">
@@ -17,8 +19,9 @@
     <param name="frame_id" value="$(arg scan_frame)"/>
     <param name="port" value="$(arg scan_dev)"/>
   </node>
+  
+  <include file="$(find t_frog_localization)/launch/localization.launch"/>
 
-  <include file="$(find t_frog_slam)/launch/gmapping.launch">
-    <arg name="scan_topic" value="$(arg scan_topic)"/>
-  </include>
+  <node pkg="rviz" type="rviz" name="rviz" args="-d $(find t_frog_navigation)/rviz_cfg/nav.rviz"/>
+
 </launch>

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+
+<launch>
+  <master auto="start"/>
+  <include file="$(find t_frog_navigation)/launch/move_base.launch">
+    <arg name="odom_frame" value="odom"/>
+    <arg name="cmd_vel" value="cmd_vel"/>
+  </include>
+  <include file="$(find t_frog_gazebo)/launch/t_frog_world.launch"/>
+  <include file="$(find t_frog_slam)/launch/gmapping.launch">
+    <arg name="scan_topic" value="laser/scan"/>
+  </include>
+  <!--include file="$(find t_frog_slam)/launch/hector_slam.launch">
+    <arg name="scan_topic" value="laser/scan"/>
+  </include-->
+</launch>
