@@ -6,7 +6,6 @@
   <arg name="scan_dev" default="/dev/sensors/hokuyo_urg"/>
   <arg name="map_file" default="$(find t_frog_slam)/map/mymap.yaml"/>
 
-  <master auto="start"/>
   <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)"/>
   <include file="$(find t_frog_driver)/launch/t_frog_drive.launch" />
 
@@ -21,7 +20,19 @@
   </node>
   
   <include file="$(find t_frog_localization)/launch/localization.launch"/>
+  <node pkg="tf" type="static_transform_publisher" name="map_2_base_footprint" args="0 0 0 0 0 0 /odom /base_footprint 100"/>
 
   <node pkg="rviz" type="rviz" name="rviz" args="-d $(find t_frog_navigation)/rviz_cfg/nav.rviz"/>
+
+  <node pkg="yocs_waypoints_navi" type="yocs_waypoints_navi_node" name="waypoints_navi" output="screen">
+    <param name="frequency"    value="5.0"/>
+    <param name="close_enough" value="0.2"/>
+    <param name="goal_timeout" value="60.0"/>
+    
+    <!--param name="waypoints_file" value="$(find t_frog_navigation)/param/waypoints.yaml"/-->
+    
+    <remap from="waypoints"  to="clicked_point"/>
+    <remap from="final_goal" to="move_base_simple/goal"/>
+  </node>
 
 </launch>
