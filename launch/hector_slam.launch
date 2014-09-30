@@ -18,9 +18,9 @@
   <node pkg="tf" type="static_transform_publisher" name="base_frame_2_laser_link" args="0 0 0 0 0 0 /base_frame /laser 100"/> 
   <node pkg="tf" type="static_transform_publisher" name="base_2_nav_link" args="0 0 0 0 0 0 /base_frame /nav 100"/>
 
-  <node pkg="rviz" type="rviz" name="rviz" args="-d $(find t_frog_navigation)/rviz_cfg/nav.rviz"/>
+  <node pkg="rviz" type="rviz" name="rviz" args="-d $(find icart_mini_navigation)/rviz_cfg/nav.rviz"/>
 
-  <include file="$(find t_frog_slam)/launch/default_mapping.launch">
+  <include file="$(find icart_mini_navigation)/launch/default_mapping.launch">
     <arg name="scan_topic" value="$(arg scan_topic)"/>
   </include> 
   <include file="$(find hector_geotiff)/launch/geotiff_mapper.launch"/>
