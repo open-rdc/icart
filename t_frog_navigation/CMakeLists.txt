@@ -6,6 +6,7 @@ project(t_frog_navigation)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
   move_base
+  nav_core
 )
 
 ## System dependencies are found with CMake's conventions
@@ -95,10 +96,9 @@ include_directories(
   ${catkin_INCLUDE_DIRS}
 )
 
-## Declare a cpp library
-# add_library(t_frog_navigation
-#   src/${PROJECT_NAME}/t_frog_navigation.cpp
-# )
+add_library(global_planner_lib
+    src/global_planner.cpp
+)
 
 ## Declare a cpp executable
 # add_executable(t_frog_navigation_node src/t_frog_navigation_node.cpp)
