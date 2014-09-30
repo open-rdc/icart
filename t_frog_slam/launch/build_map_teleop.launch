@@ -10,9 +10,11 @@
     <arg name="joy_dev" value="$(arg joy_dev)"/>
   </include>
     
-  <include file="$(find t_frog_slam)/launch/gmapping.launch">
-    <arg name="scan_topic" value="$(arg scan_topic)"/>
-  </include>
+  <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping">
+    <remap from="scan" to="$(arg scan_topic)"/>
+  </node>
+
+  <node pkg="rviz" type="rviz" name="rviz" args="-d $(find t_frog_navigation)/rviz_cfg/nav.rviz"/>
 
 </launch>
 
