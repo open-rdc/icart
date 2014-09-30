@@ -5,7 +5,7 @@
   <arg name="joy_config" default="elecom_joy"/>
   <arg name="joy_dev" default="/dev/input/js0"/>
   
-  <include file="$(find t_frog_driver)/launch/teleop_joy.launch">
+  <include file="$(find icart_mini_driver)/launch/teleop_joy.launch">
     <arg name="joy_config" value="$(arg joy_config)"/>
     <arg name="joy_dev" value="$(arg joy_dev)"/>
   </include>
@@ -14,7 +14,7 @@
     <remap from="scan" to="$(arg scan_topic)"/>
   </node>
 
-  <node pkg="rviz" type="rviz" name="rviz" args="-d $(find t_frog_navigation)/rviz_cfg/nav.rviz"/>
+  <node pkg="rviz" type="rviz" name="rviz" args="-d $(find icart_mini_navigation)/rviz_cfg/nav.rviz"/>
 
 </launch>
 
