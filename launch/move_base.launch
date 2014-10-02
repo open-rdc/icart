@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 
 <launch>
-  <arg name="odom_frame" default="/odom"/>
+  <arg name="odom_topic" default="/odom"/>
   <arg name="cmd_vel" default="/cmd_vel"/>
 
   <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
-    <remap from="/odom" to="$(arg odom_frame)"/>
+    <remap from="/odom" to="$(arg odom_topic)"/>
     <remap from="/cmd_vel" to="$(arg cmd_vel)"/>
     <rosparam file="$(find icart_mini_navigation)/param/costmap_common_params.yaml" command="load" ns="global_costmap"/>
     <rosparam file="$(find icart_mini_navigation)/param/costmap_common_params.yaml" command="load" ns="local_costmap"/>
