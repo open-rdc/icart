@@ -6,3 +6,9 @@ This package provides packages related to navigation of i-Cart mini in Tsukuba C
 ## Usage
 
 https://github.com/open-rdc/icart_mini_ros_pkgs
+
+## License
+
+Copyright (c) 2014, Robot Design and Control Lab. (MIT License)
+
+See LICENSE for more info.
