@@ -6,7 +6,7 @@
   <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)"/>
 
   <include file="$(find icart_mini_navigation)/launch/move_base.launch">
-    <arg name="odom_topic" value="icart_mini/odom"/>
+    <arg name="odom_topic" value="combined_odom"/>
     <arg name="cmd_vel" value="icart_mini/cmd_vel"/>
   </include>
 
