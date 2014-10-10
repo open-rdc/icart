@@ -16,19 +16,23 @@ class WaypointsNavigation{
 public:
     WaypointsNavigation() :
         has_activate_(false),
-        move_base_action_("move_base", true)
+        move_base_action_("move_base", true),
+        rate_(10)
     {
         while((move_base_action_.waitForServer(ros::Duration(1.0)) == false) && (ros::ok() == true))
         {
             ROS_INFO("Waiting...");
         }
         
-        
         ros::NodeHandle private_nh("~");
         private_nh.param("robot_frame", robot_frame_, std::string("/base_link"));
         private_nh.param("world_frame", world_frame_, std::string("/map"));
+        
+        double max_update_rate;
+        private_nh.param("max_update_rate", max_update_rate, 10.0);
+        rate_ = ros::Rate(max_update_rate);
         std::string filename = "";
-        private_nh.param<std::string>("filename", filename, filename);
+        private_nh.param("filename", filename, filename);
         if(filename != ""){
             ROS_INFO_STREAM("Read waypoints data from " << filename);
             readFile(filename);
@@ -126,30 +130,40 @@ public:
         return dist < dist_err;
     }
 
+    void sleep(){
+        rate_.sleep();
+        ros::spinOnce();
+    }
+
     void startNavigationGL(const geometry_msgs::Point &dest){
+        geometry_msgs::Pose pose;
+        pose.position = dest;
+        pose.orientation = tf::createQuaternionMsgFromYaw(0.0);
+        startNavigationGL(pose);
+    }
+
+    void startNavigationGL(const geometry_msgs::Pose &dest){
         move_base_msgs::MoveBaseGoal move_base_goal;
         move_base_goal.target_pose.header.stamp = ros::Time::now();
         move_base_goal.target_pose.header.frame_id = world_frame_;
-        move_base_goal.target_pose.pose.position = dest;
-        move_base_goal.target_pose.pose.orientation = tf::createQuaternionMsgFromYaw(0.0);
+        move_base_goal.target_pose.pose.position = dest.position;
+        move_base_goal.target_pose.pose.orientation = dest.orientation;
         
         move_base_action_.sendGoal(move_base_goal);
     }
 
     void run(){
-        ros::Rate rate(10.0);
         while(ros::ok()){
             for(int i=0; i < waypoints_.size(); i++){
                 if(!ros::ok()) break;
                 
                 startNavigationGL(waypoints_[i].point);
                 while(!navigationFinished(waypoints_[i].point) && ros::ok()){
-                    ros::spinOnce();
-                    rate.sleep();
+                    sleep();
                 }
             }
-            ros::spinOnce();
-            rate.sleep();
+
+            sleep();
         }
     }
 
@@ -160,6 +174,7 @@ private:
     bool has_activate_;
     std::string robot_frame_, world_frame_;
     tf::TransformListener tf_listener_;
+    ros::Rate rate_;
 };
 
 int main(int argc, char *argv[]){
