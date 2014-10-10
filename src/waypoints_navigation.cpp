@@ -73,14 +73,14 @@ public:
             const YAML::Node *fp_node = fp_node_tmp ? &fp_node_tmp : NULL;
 
             if(fp_node != NULL){
-                finish_pose_.pose.position.x = (*fp_node)["pose"]["position"]["x"].as<double>();
-                finish_pose_.pose.position.y = (*fp_node)["pose"]["position"]["y"].as<double>();
-                finish_pose_.pose.position.z = (*fp_node)["pose"]["position"]["z"].as<double>();
+                finish_pose_.position.x = (*fp_node)["pose"]["position"]["x"].as<double>();
+                finish_pose_.position.y = (*fp_node)["pose"]["position"]["y"].as<double>();
+                finish_pose_.position.z = (*fp_node)["pose"]["position"]["z"].as<double>();
 
-                finish_pose_.pose.orientation.x = (*fp_node)["pose"]["orientation"]["x"].as<double>();
-                finish_pose_.pose.orientation.y = (*fp_node)["pose"]["orientation"]["y"].as<double>();
-                finish_pose_.pose.orientation.z = (*fp_node)["pose"]["orientation"]["z"].as<double>();
-                finish_pose_.pose.orientation.w = (*fp_node)["pose"]["orientation"]["w"].as<double>();
+                finish_pose_.orientation.x = (*fp_node)["pose"]["orientation"]["x"].as<double>();
+                finish_pose_.orientation.y = (*fp_node)["pose"]["orientation"]["y"].as<double>();
+                finish_pose_.orientation.z = (*fp_node)["pose"]["orientation"]["z"].as<double>();
+                finish_pose_.orientation.w = (*fp_node)["pose"]["orientation"]["w"].as<double>();
             }else{
                 return false;
             }
@@ -114,7 +114,11 @@ public:
         return ret;
     }
 
-    bool navigationFinished(const geometry_msgs::Point &dest, double dist_err = 0.5){
+    bool navigationFinished(){
+        return move_base_action_.getState() == actionlib::SimpleClientGoalState::SUCCEEDED;
+    }
+
+    bool onNavigationPoint(const geometry_msgs::Point &dest, double dist_err = 0.5){
         tf::StampedTransform robot_gl;
         try{
             tf_listener_.lookupTransform(world_frame_, robot_frame_, ros::Time(0.0), robot_gl);
@@ -154,13 +158,17 @@ public:
 
     void run(){
         while(ros::ok()){
-            for(int i=0; i < waypoints_.size(); i++){
-                if(!ros::ok()) break;
-                
-                startNavigationGL(waypoints_[i].point);
-                while(!navigationFinished(waypoints_[i].point) && ros::ok()){
-                    sleep();
+            if(has_activate_){
+                for(int i=0; i < waypoints_.size(); i++){
+                    if(!ros::ok()) break;
+                    
+                    startNavigationGL(waypoints_[i].point);
+                    while(!onNavigationPoint(waypoints_[i].point)) sleep();
                 }
+                waypoints_.clear();
+                startNavigationGL(finish_pose_);
+                while(!navigationFinished() && ros::ok()) sleep();
+                has_activate_ = false;
             }
 
             sleep();
@@ -170,7 +178,7 @@ public:
 private:
     actionlib::SimpleActionClient<move_base_msgs::MoveBaseAction> move_base_action_;
     std::vector<geometry_msgs::PointStamped> waypoints_;
-    geometry_msgs::PoseStamped finish_pose_;
+    geometry_msgs::Pose finish_pose_;
     bool has_activate_;
     std::string robot_frame_, world_frame_;
     tf::TransformListener tf_listener_;
