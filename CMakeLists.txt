@@ -9,6 +9,7 @@ find_package(catkin REQUIRED COMPONENTS
   actionlib_msgs
   actionlib
   tf
+  std_msgs
 )
 
 find_package(PkgConfig)
