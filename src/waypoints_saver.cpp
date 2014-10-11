@@ -1,24 +1,50 @@
 #include <ros/ros.h>
+#include <tf/transform_listener.h>
+
+#include <sensor_msgs/Joy.h>
 #include <geometry_msgs/PointStamped.h>
 #include <geometry_msgs/PoseStamped.h>
 #include <std_msgs/String.h>
+
 #include <vector>
 #include <fstream>
 #include <string>
+
 
 class WaypointsSaver{
 public:
     WaypointsSaver() : 
         filename_("waypoints.yaml")
     {
-        waypoints_sub_ = nh_.subscribe("waypoints", 1, &WaypointsSaver::waypointsCallback, this);
+        waypoints_viz_sub_ = nh_.subscribe("waypoints_viz", 1, &WaypointsSaver::waypointsVizCallback, this);
+        waypoints_joy_sub_ = nh_.subscribe("waypoints_joy", 1, &WaypointsSaver::waypointsJoyCallback, this);
         finish_pose_sub_ = nh_.subscribe("finish_pose", 1, &WaypointsSaver::finishPoseCallback, this);
 
         ros::NodeHandle private_nh("~");
-        private_nh.param<std::string>("filename", filename_, filename_);
+        private_nh.param("filename", filename_, filename_);
+        private_nh.param("save_joy_button", save_joy_button_, 0);
+        private_nh.param("robot_frame", robot_frame_, std::string("/base_link"));
+        private_nh.param("world_frame", world_frame_, std::string("/map"));
+    }
+
+    void waypointsJoyCallback(const sensor_msgs::Joy &msg){
+        ROS_INFO_STREAM("joy = " << msg);
+        if(msg.buttons[save_joy_button_] == 1){
+            tf::StampedTransform robot_gl;
+            try{
+                tf_listener_.lookupTransform(world_frame_, robot_frame_, ros::Time(0.0), robot_gl);
+                geometry_msgs::PointStamped point;
+                point.point.x = robot_gl.getOrigin().x();
+                point.point.y = robot_gl.getOrigin().y();
+                point.point.z = robot_gl.getOrigin().z();
+                waypoints_.push_back(point);
+            }catch(tf::TransformException &e){
+                ROS_WARN_STREAM("tf::TransformException: " << e.what());
+            }
+        }
     }
     
-    void waypointsCallback(const geometry_msgs::PointStamped &msg){
+    void waypointsVizCallback(const geometry_msgs::PointStamped &msg){
         ROS_INFO_STREAM("point = " << msg);
         waypoints_.push_back(msg);
     }
@@ -66,12 +92,17 @@ public:
     }
     
 private:
-    ros::Subscriber waypoints_sub_;
+    ros::Subscriber waypoints_viz_sub_;
+    ros::Subscriber waypoints_joy_sub_;
     ros::Subscriber finish_pose_sub_;
     std::vector<geometry_msgs::PointStamped> waypoints_;
     geometry_msgs::PoseStamped finish_pose_;
+    tf::TransformListener tf_listener_;
+    int save_joy_button_;
     ros::NodeHandle nh_;
     std::string filename_;
+    std::string world_frame_;
+    std::string robot_frame_;
 };
 
 int main(int argc, char *argv[]){
