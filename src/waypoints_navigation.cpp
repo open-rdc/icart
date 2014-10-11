@@ -1,4 +1,5 @@
 #include <ros/ros.h>
+#include <std_msgs/String.h>
 #include <geometry_msgs/PointStamped.h>
 #include <geometry_msgs/PoseStamped.h>
 #include <move_base_msgs/MoveBaseAction.h>
@@ -39,6 +40,15 @@ public:
         }
         for(int i=0; i < waypoints_.size(); i++){
             ROS_INFO_STREAM("waypoints \n" << waypoints_[i]);
+        }
+        ros::NodeHandle nh;
+
+        syscommand_sub_ = nh.subscribe("syscommand", 1, &WaypointsNavigation::syscommandCallback, this);
+    }
+
+    void syscommandCallback(const std_msgs::String &msg){
+        if(msg.data == "start"){
+            has_activate_ = true;
         }
     }
 
@@ -92,7 +102,6 @@ public:
             return false;
         }
 
-        has_activate_ = true;
         return true;
     }
 
@@ -183,6 +192,7 @@ private:
     std::string robot_frame_, world_frame_;
     tf::TransformListener tf_listener_;
     ros::Rate rate_;
+    ros::Subscriber syscommand_sub_;
 };
 
 int main(int argc, char *argv[]){
