@@ -28,8 +28,9 @@ public:
     }
 
     void waypointsJoyCallback(const sensor_msgs::Joy &msg){
+        static ros::Time saved_time(0.0);
         ROS_INFO_STREAM("joy = " << msg);
-        if(msg.buttons[save_joy_button_] == 1){
+        if(msg.buttons[save_joy_button_] == 1 && (ros::Time::now() - saved_time).toSec() > 3.0){
             tf::StampedTransform robot_gl;
             try{
                 tf_listener_.lookupTransform(world_frame_, robot_frame_, ros::Time(0.0), robot_gl);
@@ -38,6 +39,7 @@ public:
                 point.point.y = robot_gl.getOrigin().y();
                 point.point.z = robot_gl.getOrigin().z();
                 waypoints_.push_back(point);
+                saved_time = ros::Time::now();
             }catch(tf::TransformException &e){
                 ROS_WARN_STREAM("tf::TransformException: " << e.what());
             }
