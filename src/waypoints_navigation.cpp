@@ -169,6 +169,7 @@ public:
         while(ros::ok()){
             if(has_activate_){
                 for(int i=0; i < waypoints_.size(); i++){
+                    ROS_INFO_STREAM("waypoint = " << waypoints_[i]);
                     if(!ros::ok()) break;
                     
                     startNavigationGL(waypoints_[i].point);
