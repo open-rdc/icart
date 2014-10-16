@@ -173,8 +173,19 @@ public:
                     if(!ros::ok()) break;
                     
                     startNavigationGL(waypoints_[i].point);
-                    while(!onNavigationPoint(waypoints_[i].point)) sleep();
+                    double start_nav_time = ros::Time::now().toSec();
+                    while(!onNavigationPoint(waypoints_[i].point)){
+                        if(ros::Time::now().toSec() - start_nav_time > 10.0){
+                            ROS_INFO("Resend the navigation goal.");
+                            startNavigationGL(waypoints_[i].point);
+                            start_nav_time = ros::Time::now().toSec();
+                        }
+                        actionlib::SimpleClientGoalState state = move_base_action_.getState();
+                        sleep();
+                    }
+                    ROS_INFO("waypoint goal");
                 }
+                ROS_INFO("waypoints clear");
                 waypoints_.clear();
                 startNavigationGL(finish_pose_);
                 while(!navigationFinished() && ros::ok()) sleep();
