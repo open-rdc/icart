@@ -15,5 +15,6 @@
     <!--param name="base_global_planner" value="global_planner/GlobalPlanner"/-->
     <!--rosparam file="$(find icart_mini_navigation)/param/dwa_local_planner_params.yaml" command="load"/-->
     <rosparam file="$(find icart_mini_navigation)/param/base_local_planner_params.yaml" command="load"/>
+    <rosparam file="$(find icart_mini_navigation)/param/recovery_params.yaml" command="load"/>
   </node>
 </launch>
