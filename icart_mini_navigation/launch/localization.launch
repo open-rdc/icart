@@ -25,7 +25,7 @@
   <param name="laser_lambda_short" value="0.1"/>
   <param name="laser_lambda_short" value="0.1"/>
   <param name="laser_model_type" value="likelihood_field"/>
-  <!-- <param name="laser_model_type" value="beam"/> -->
+  
   <param name="laser_likelihood_max_dist" value="2.0"/>
   <param name="update_min_d" value="0.2"/>
   <param name="update_min_a" value="0.5"/>
@@ -34,5 +34,13 @@
   <param name="transform_tolerance" value="0.1"/>
   <param name="recovery_alpha_slow" value="0.0"/>
   <param name="recovery_alpha_fast" value="0.0"/>
+  
+  <!-- initial pose config  -->
+  <param name="initial_pose_x" value="0.0"/>
+  <param name="initial_pose_y" value="0.0"/>
+  <param name="initial_pose_a" value="0.0"/>
+  <param name="initial_cov_xx" value="0.0"/>
+  <param name="initial_cov_yy" value="0.0"/>
+  <param name="initial_cov_aa" value="0.0"/>
 </node>
 </launch>
