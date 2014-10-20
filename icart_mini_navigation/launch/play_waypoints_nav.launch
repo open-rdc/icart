@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+
+<launch>
+  <arg name="map_file" default="$(find icart_mini_navigation)/maps/mymap.yaml"/>
+  <arg name="waypoints_file" default="$(find icart_mini_navigation)/waypoints_cfg/waypoints.yaml"/>
+
+  <include file="$(find icart_mini_navigation)/launch/nav_static_map.launch">
+    <arg name="map_file" value="$(arg map_file)"/>
+  </include>
+
+  <node name="waypoints_navigation" pkg="icart_mini_navigation" type="waypoints_navigation" output="screen">
+    <param name="filename" value="$(arg waypoints_file)"/>
+  </node>
+</launch>
+

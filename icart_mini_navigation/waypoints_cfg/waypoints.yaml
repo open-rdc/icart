@@ -1,0 +1,32 @@
+waypoints:
+    - point:
+        x: 3.78364
+        y: 5.2717
+        z: -0.000312805
+    - point:
+        x: 3.56518
+        y: -4.01272
+        z: 0.00287247
+    - point:
+        x: 15.1978
+        y: -3.84385
+        z: -0.00192642
+    - point:
+        x: 15.0458
+        y: 6.27981
+        z: -0.0012207
+finish_pose:
+    header:
+        seq: 0
+        stamp: 591.922000000
+        frame_id: map
+    pose:
+        position:
+            x: 8.8869
+            y: 0.670778
+            z: 0
+        orientation:
+            x: 0
+            y: 0
+            z: 0.671936
+            w: 0.740609
