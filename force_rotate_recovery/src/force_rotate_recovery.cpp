@@ -52,7 +52,7 @@ namespace force_rotate_recovery {
             return;
         }
         
-        ROS_WARN("rotate recovery -f behavior started.");
+        ROS_WARN("rotate recovery behavior -f started.");
 
         ros::Rate r(frequency_);
         ros::NodeHandle n;
