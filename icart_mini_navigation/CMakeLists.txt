@@ -26,18 +26,6 @@ include_directories(
   ${yaml-cpp_INCLUDE_DIRS}
 )
 
-add_executable(waypoints_saver src/waypoints_saver.cpp)
-add_executable(waypoints_navigation src/waypoints_navigation.cpp)
-
-target_link_libraries(waypoints_saver
-    ${catkin_LIBRARIES}
-)
-
-target_link_libraries(waypoints_navigation
-    ${catkin_LIBRARIES}
-    ${yaml-cpp_LIBRARIES}
-)
-
 #############
 ## Install ##
 #############
