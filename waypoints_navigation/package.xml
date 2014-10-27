@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package>
+  <name>waypoints_navigation</name>
+  <version>0.0.0</version>
+  <description>The waypoints_navigation package</description>
+
+  <maintainer email="method_aspect_card@yahoo.co.jp">Daiki Maekawa</maintainer>
+  <license>BSD</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>move_base</build_depend>
+  <run_depend>move_base</run_depend>
+  <export>
+  </export>
+</package>
