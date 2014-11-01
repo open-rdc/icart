@@ -5,6 +5,7 @@
   <description>The icart_mini_navigation package</description>
 
   <maintainer email="method_aspect_card@yahoo.co.jp">Daiki Maekawa</maintainer>
+  <author>Daiki Maekawa</author>
   <license>BSD</license>
 
   <buildtool_depend>catkin</buildtool_depend>
