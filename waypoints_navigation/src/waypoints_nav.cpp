@@ -191,7 +191,7 @@ public:
             marker.color.a = 1.0f;
             markers_array.markers.push_back(marker);
 
-            ROS_INFO_STREAM("waypoints \n" << waypoints_[i]);
+            //ROS_INFO_STREAM("waypoints \n" << waypoints_[i]);
         }
         marker_pub_.publish(markers_array);
     }
