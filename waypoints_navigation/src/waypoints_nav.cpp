@@ -13,6 +13,8 @@
 #include <fstream>
 #include <string>
 
+#include <visualization_msgs/MarkerArray.h>
+
 class WaypointsNavigation{
 public:
     WaypointsNavigation() :
@@ -38,12 +40,10 @@ public:
             ROS_INFO_STREAM("Read waypoints data from " << filename);
             readFile(filename);
         }
-        for(int i=0; i < waypoints_.size(); i++){
-            ROS_INFO_STREAM("waypoints \n" << waypoints_[i]);
-        }
+        
         ros::NodeHandle nh;
-
         syscommand_sub_ = nh.subscribe("syscommand", 1, &WaypointsNavigation::syscommandCallback, this);
+        marker_pub_ = nh.advertise<visualization_msgs::MarkerArray>("visualization_marker", 10);
     }
 
     void syscommandCallback(const std_msgs::String &msg){
@@ -146,6 +146,7 @@ public:
     void sleep(){
         rate_.sleep();
         ros::spinOnce();
+        publishMarkers();
     }
 
     void startNavigationGL(const geometry_msgs::Point &dest){
@@ -163,6 +164,36 @@ public:
         move_base_goal.target_pose.pose.orientation = dest.orientation;
         
         move_base_action_.sendGoal(move_base_goal);
+    }
+
+    void publishMarkers(){
+        visualization_msgs::MarkerArray markers_array;
+        for(int i=0; i < waypoints_.size(); i++){
+            visualization_msgs::Marker marker, label;
+            marker.header.frame_id = world_frame_;
+            marker.header.stamp = ros::Time::now();
+            marker.scale.x = 0.2;
+            marker.scale.y = 0.2;
+            marker.scale.z = 0.2;
+            marker.pose.position.z = marker.scale.z / 2.0;
+            marker.color.r = 0.8f;
+            marker.color.g = 0.2f;
+            marker.color.b = 0.2f;
+            
+            std::stringstream name;
+            name << "waypoint " << i;
+            marker.ns = name.str();
+            marker.id = i;
+            marker.pose.position.x = waypoints_[i].point.x;
+            marker.pose.position.y = waypoints_[i].point.y;
+            marker.type = visualization_msgs::Marker::SPHERE;
+            marker.action = visualization_msgs::Marker::ADD;
+            marker.color.a = 1.0f;
+            markers_array.markers.push_back(marker);
+
+            ROS_INFO_STREAM("waypoints \n" << waypoints_[i]);
+        }
+        marker_pub_.publish(markers_array);
     }
 
     void run(){
@@ -205,6 +236,7 @@ private:
     tf::TransformListener tf_listener_;
     ros::Rate rate_;
     ros::Subscriber syscommand_sub_;
+    ros::Publisher marker_pub_;
 };
 
 int main(int argc, char *argv[]){
