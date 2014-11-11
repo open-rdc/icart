@@ -16,6 +16,7 @@
   <run_depend>map_server</run_depend>
   <run_depend>yocs_waypoints_navi</run_depend>
   <run_depend>rviz</run_depend>
+  <run_depend>gmapping</run_depend>
   <export>
   </export>
 </package>
