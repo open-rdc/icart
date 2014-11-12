@@ -17,6 +17,7 @@
   <run_depend>yocs_waypoints_navi</run_depend>
   <run_depend>rviz</run_depend>
   <run_depend>gmapping</run_depend>
+  <run_depend>amcl</run_depend>
   <export>
   </export>
 </package>
