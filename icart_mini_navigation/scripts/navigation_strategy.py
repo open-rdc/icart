@@ -27,11 +27,11 @@ class talk_node(object):
         run = re.compile('(?P<run>走行)').search(message)
         start = re.compile('(?P<start>開始)').search(message)
 
-	print 'you said : %s' %message
+        print 'you said : %s' %message
 
         if run is not None and start is not None:
-	    text = u'ナビゲーションを開始します。'
-	    robot_msg = 'start'
+            text = u'ナビゲーションを開始します。'
+            robot_msg = 'start'
 
             rospy.loginfo(robot_msg)
             syscommand_pub.publish(robot_msg)
@@ -41,7 +41,6 @@ class talk_node(object):
             self._interface.say(text, 'ja', 'nict')
 
     def run(self):
-
         self._interface.init()
         self._interface.register_sr_response(self.sr_response)
         self._interface.set_spi_config(language='ja',engine='nict')
