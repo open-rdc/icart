@@ -1,5 +1,6 @@
 #include <ros/ros.h>
 #include <std_msgs/String.h>
+#include <std_srvs/Empty.h>
 #include <geometry_msgs/PointStamped.h>
 #include <geometry_msgs/PoseStamped.h>
 #include <move_base_msgs/MoveBaseAction.h>
@@ -44,6 +45,7 @@ public:
         ros::NodeHandle nh;
         syscommand_sub_ = nh.subscribe("syscommand", 1, &WaypointsNavigation::syscommandCallback, this);
         marker_pub_ = nh.advertise<visualization_msgs::MarkerArray>("visualization_marker", 10);
+        clear_costmaps_srv_ = nh.serviceClient<std_srvs::Empty>("/move_base/clear_costmaps");
     }
 
     void syscommandCallback(const std_msgs::String &msg){
@@ -128,12 +130,8 @@ public:
     }
 
     bool onNavigationPoint(const geometry_msgs::Point &dest, double dist_err = 0.5){
-        tf::StampedTransform robot_gl;
-        try{
-            tf_listener_.lookupTransform(world_frame_, robot_frame_, ros::Time(0.0), robot_gl);
-        }catch(tf::TransformException &e){
-            ROS_WARN_STREAM("tf::TransformException: " << e.what());
-        }
+        tf::StampedTransform robot_gl = getRobotPosGL();
+
         const double wx = dest.x;
         const double wy = dest.y;
         const double rx = robot_gl.getOrigin().x();
@@ -141,6 +139,17 @@ public:
         const double dist = std::sqrt(std::pow(wx - rx, 2) + std::pow(wy - ry, 2));
 
         return dist < dist_err;
+    }
+
+    tf::StampedTransform getRobotPosGL(){
+        tf::StampedTransform robot_gl;
+        try{
+            tf_listener_.lookupTransform(world_frame_, robot_frame_, ros::Time(0.0), robot_gl);
+        }catch(tf::TransformException &e){
+            ROS_WARN_STREAM("tf::TransformException: " << e.what());
+        }
+
+        return robot_gl;
     }
 
     void sleep(){
@@ -204,12 +213,25 @@ public:
                     if(!ros::ok()) break;
                     
                     startNavigationGL(waypoints_[i].point);
-                    double start_nav_time = ros::Time::now().toSec();
+                    double old_time = ros::Time::now().toSec();
+                    tf::StampedTransform old_robot_gl = getRobotPosGL();
                     while(!onNavigationPoint(waypoints_[i].point)){
-                        if(ros::Time::now().toSec() - start_nav_time > 10.0){
-                            ROS_INFO("Resend the navigation goal.");
-                            startNavigationGL(waypoints_[i].point);
-                            start_nav_time = ros::Time::now().toSec();
+                        if(ros::Time::now().toSec() - old_time > 10.0){
+                            tf::StampedTransform robot_gl = getRobotPosGL();
+
+                            const double old_x = old_robot_gl.getOrigin().x();
+                            const double old_y = old_robot_gl.getOrigin().y();
+                            const double x = robot_gl.getOrigin().x();
+                            const double y = robot_gl.getOrigin().y();
+                            const double dist = std::sqrt(std::pow(old_x - x, 2) + std::pow(old_y - y, 2));
+                            if(dist < 0.5){
+                                ROS_WARN("Resend the navigation goal.");
+                                std_srvs::Empty empty;
+                                clear_costmaps_srv_.call(empty);
+                                //startNavigationGL(waypoints_[i].point);
+                            }
+                            old_time = ros::Time::now().toSec();
+                            old_robot_gl = robot_gl;
                         }
                         actionlib::SimpleClientGoalState state = move_base_action_.getState();
                         sleep();
@@ -237,6 +259,7 @@ private:
     ros::Rate rate_;
     ros::Subscriber syscommand_sub_;
     ros::Publisher marker_pub_;
+    ros::ServiceClient clear_costmaps_srv_;
 };
 
 int main(int argc, char *argv[]){
