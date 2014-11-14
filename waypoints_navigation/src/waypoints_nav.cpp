@@ -3,6 +3,7 @@
 #include <std_srvs/Empty.h>
 #include <geometry_msgs/PointStamped.h>
 #include <geometry_msgs/PoseStamped.h>
+#include <geometry_msgs/Twist.h>
 #include <move_base_msgs/MoveBaseAction.h>
 #include <actionlib/client/simple_action_client.h>
 #include <tf/tf.h>
@@ -21,7 +22,8 @@ public:
     WaypointsNavigation() :
         has_activate_(false),
         move_base_action_("move_base", true),
-        rate_(10)
+        rate_(10),
+        last_moved_time_(0)
     {
         while((move_base_action_.waitForServer(ros::Duration(1.0)) == false) && (ros::ok() == true))
         {
@@ -44,6 +46,7 @@ public:
         
         ros::NodeHandle nh;
         syscommand_sub_ = nh.subscribe("syscommand", 1, &WaypointsNavigation::syscommandCallback, this);
+        cmd_vel_sub_ = nh.subscribe("icart_mini/cmd_vel", 1, &WaypointsNavigation::cmdVelCallback, this);
         marker_pub_ = nh.advertise<visualization_msgs::MarkerArray>("visualization_marker", 10);
         clear_costmaps_srv_ = nh.serviceClient<std_srvs::Empty>("/move_base/clear_costmaps");
     }
@@ -51,6 +54,20 @@ public:
     void syscommandCallback(const std_msgs::String &msg){
         if(msg.data == "start"){
             has_activate_ = true;
+        }
+    }
+
+    void cmdVelCallback(const geometry_msgs::Twist &msg){
+        if(msg.linear.x > -0.001 && msg.linear.x < 0.001   &&
+           msg.linear.y > -0.001 && msg.linear.y < 0.001   &&
+           msg.linear.z > -0.001 && msg.linear.z < 0.001   &&
+           msg.angular.x > -0.001 && msg.angular.x < 0.001 &&
+           msg.angular.y > -0.001 && msg.angular.y < 0.001 &&
+           msg.angular.z > -0.001 && msg.angular.z < 0.001){
+            
+            ROS_INFO("command velocity all zero");
+        }else{
+            last_moved_time_ = ros::Time::now().toSec();
         }
     }
 
@@ -213,25 +230,15 @@ public:
                     if(!ros::ok()) break;
                     
                     startNavigationGL(waypoints_[i].point);
-                    double old_time = ros::Time::now().toSec();
-                    tf::StampedTransform old_robot_gl = getRobotPosGL();
+                    double start_nav_time = ros::Time::now().toSec();
                     while(!onNavigationPoint(waypoints_[i].point)){
-                        if(ros::Time::now().toSec() - old_time > 10.0){
-                            tf::StampedTransform robot_gl = getRobotPosGL();
-
-                            const double old_x = old_robot_gl.getOrigin().x();
-                            const double old_y = old_robot_gl.getOrigin().y();
-                            const double x = robot_gl.getOrigin().x();
-                            const double y = robot_gl.getOrigin().y();
-                            const double dist = std::sqrt(std::pow(old_x - x, 2) + std::pow(old_y - y, 2));
-                            if(dist < 0.5){
-                                ROS_WARN("Resend the navigation goal.");
-                                std_srvs::Empty empty;
-                                clear_costmaps_srv_.call(empty);
-                                //startNavigationGL(waypoints_[i].point);
-                            }
-                            old_time = ros::Time::now().toSec();
-                            old_robot_gl = robot_gl;
+                        double time = ros::Time::now().toSec();
+                        if(time - start_nav_time > 10.0 && time - last_moved_time_ > 10.0){
+                            ROS_WARN("Resend the navigation goal.");
+                            std_srvs::Empty empty;
+                            clear_costmaps_srv_.call(empty);
+                            startNavigationGL(waypoints_[i].point);
+                            start_nav_time = time;
                         }
                         actionlib::SimpleClientGoalState state = move_base_action_.getState();
                         sleep();
@@ -258,8 +265,10 @@ private:
     tf::TransformListener tf_listener_;
     ros::Rate rate_;
     ros::Subscriber syscommand_sub_;
+    ros::Subscriber cmd_vel_sub_;
     ros::Publisher marker_pub_;
     ros::ServiceClient clear_costmaps_srv_;
+    double last_moved_time_;
 };
 
 int main(int argc, char *argv[]){
