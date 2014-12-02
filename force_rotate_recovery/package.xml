@@ -1,8 +1,8 @@
 <package>
     <name>force_rotate_recovery</name>
-    <version>0.0.2</version>
+    <version>0.0.3</version>
     <description>
-        TODO
+        The force_rotate_recovery package
     </description>
     <author>Eitan Marder-Eppstein</author>
     <author>contradict@gmail.com</author>
