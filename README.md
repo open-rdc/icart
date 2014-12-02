@@ -1,4 +1,4 @@
-icart_mini_navigation
+icart_mini
 =================
 
 This package provides packages related to navigation of i-Cart mini in Tsukuba Challenge.
