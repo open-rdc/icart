@@ -1,0 +1,10 @@
+<library path="lib/libicart_mini_hw_sim">
+    <class
+        name="icart_mini_gazebo/ICartMiniHWSim"
+        type="icart_mini_gazebo::ICartMiniHWSim"
+        base_class_type="gazebo_ros_control::RobotHWSim">
+        <description>
+            TODO
+        </description>
+    </class>
+</library>

@@ -1,0 +1,38 @@
+<launch>
+
+  <!-- these are the arguments you can pass this launch file, for example paused:=true -->
+  <arg name="paused" default="false"/>
+  <arg name="use_sim_time" default="true"/>
+  <arg name="gui" default="true"/>
+  <arg name="headless" default="false"/>
+  <arg name="debug" default="false"/>
+
+  <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find icart_mini_gazebo)/worlds/empty.world"/>
+    <arg name="debug" value="$(arg debug)" />
+    <arg name="gui" value="$(arg gui)" />
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="use_sim_time" value="$(arg use_sim_time)"/>
+    <arg name="headless" value="$(arg headless)"/>
+  </include>
+
+  <!-- Load the URDF into the ROS Parameter Server -->
+  <param name="robot_description"
+         command="$(find xacro)/xacro.py '$(find icart_mini_description)/urdf/icart_mini.xacro'" />
+
+  <!-- Run a python script to the send a service call to gazebo_ros to spawn a URDF robot -->
+  <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+        args="-urdf -model icart_mini -param robot_description"/>
+  
+  <node name="combine_dr_measurements" pkg="combine_dr_measurements" type="odometry_publisher">
+    <param name="max_update_rate" value="20"/>
+    <remap from="odom" to="/icart_mini/odom"/>
+    <remap from="imu" to="/icart_mini/imu"/>
+  </node>
+
+  <!-- ros_control icart_mini launch file -->
+  <include file="$(find icart_mini_control)/launch/icart_mini_control.launch" />
+
+</launch>
+
