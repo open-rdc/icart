@@ -5,7 +5,7 @@ This package provides packages related to navigation of i-Cart mini in Tsukuba C
 
 ## Usage
 
-https://github.com/open-rdc/icart_mini_ros_pkgs
+https://github.com/open-rdc/TsukubaChallenge
 
 ## License
 
