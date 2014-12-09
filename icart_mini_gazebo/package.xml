@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package>
   <name>icart_mini_gazebo</name>
-  <version>0.0.3</version>
+  <version>0.0.5</version>
   <description>The icart_mini_gazebo package</description>
 
   <maintainer email="method_aspect_card@yahoo.co.jp">Daiki Maekawa</maintainer>
