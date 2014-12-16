@@ -22,6 +22,12 @@ include_directories(${catkin_INCLUDE_DIRS})
 list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake/Modules)
 find_package(YPSpur)
 
+if(${YPSPUR_FOUND})
+    MESSAGE(STATUS "YPSpur Found")
+else(${YPSPUR_FOUND})
+    MESSAGE(STATUS "YPSpur Not Found")
+endif(${YPSPUR_FOUND})
+
 add_executable(icart_mini_driver_node src/icart_mini_driver_node.cpp)
 
 target_link_libraries(icart_mini_driver_node
