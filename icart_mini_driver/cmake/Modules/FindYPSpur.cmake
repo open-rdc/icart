@@ -7,3 +7,6 @@ find_path(YPSPUR_LIB_DIR ypspur
 HINTS /usr/local/lib /usr/lib /opt/local/lib)
 find_library(YPSPUR_LIBRARY ypspur
 HINTS /usr/local/lib /usr/lib /opt/local/lib)
+
+find_package_handle_standard_args(YPSpur DEFAULT_MSG YPSPUR_LIBRARY YPSPUR_INCLUDE_DIR)
+
