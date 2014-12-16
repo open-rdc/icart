@@ -18,10 +18,14 @@ catkin_package(
 
 include_directories(${catkin_INCLUDE_DIRS})
 
+#TODO: Support Windows YPSpur
+list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake/Modules)
+find_package(YPSpur)
+
 add_executable(icart_mini_driver_node src/icart_mini_driver_node.cpp)
 
 target_link_libraries(icart_mini_driver_node
-    /usr/local/lib/libypspur.a
     ${catkin_LIBRARIES}
+    ${YPSPUR_LIBRARY}
 )
 
