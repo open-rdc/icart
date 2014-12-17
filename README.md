@@ -11,7 +11,7 @@ Install ROS software (recommended ROS indigo version with Ubuntu 14.04LTS) at ht
 $ cd CATKIN_WORKSPACE/src
 $ git clone https://github.com/open-rdc/icart_mini
 $ wstool init
-$ wstool merge icart_mini.install
+$ wstool merge icart_mini/icart_mini.install
 $ wstool up
 $ rosdep install --from-paths . --ignore-src --rosdistro $ROS_DISTRO -y
 $ cd ..
