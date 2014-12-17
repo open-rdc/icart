@@ -2,7 +2,7 @@
 <package>
   <name>icart_mini</name>
   <version>0.1.1</version>
-  <description>The icart_mini metapackage</description>
+  <description>This package provides packages related to navigation of i-Cart mini.</description>
   <maintainer email="method_aspect_card@yahoo.co.jp">Daiki Maekawa</maintainer>
   <author>Daiki Maekawa</author>
   <license>BSD</license>
