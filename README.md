@@ -18,8 +18,6 @@ $ cd ..
 $ catkin_make
 ```
 
-Note that the libypspur is needed. 
-
 ## Usage
 
 #### Bring up the real/simulated robot
