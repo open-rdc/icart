@@ -15,6 +15,10 @@ find_package(catkin REQUIRED COMPONENTS
 find_package(PkgConfig)
 pkg_search_module(yaml-cpp REQUIRED yaml-cpp)
 
+if(NOT ${yaml-cpp_VERSION} VERSION_LESS "0.5")
+add_definitions(-DNEW_YAMLCPP)
+endif()
+
 catkin_package(
   #INCLUDE_DIRS include
   LIBRARIES ${PROJECT_NAME}
