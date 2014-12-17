@@ -20,7 +20,7 @@ $ catkin_make
 
 ## Usage
 
-http://wiki.ros.org/icart_mini
+Please see [the icart_mini page on the ROS wiki](http://wiki.ros.org/icart_mini) for documentation.
 
 ## Task Management
 
