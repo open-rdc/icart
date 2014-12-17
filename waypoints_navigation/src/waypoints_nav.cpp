@@ -17,6 +17,14 @@
 
 #include <visualization_msgs/MarkerArray.h>
 
+#ifdef NEW_YAMLCPP
+template<typename T>
+void operator >> (const YAML::Node& node, T& i)
+{
+    i = node.as<T>();
+}
+#endif
+
 class WaypointsNavigation{
 public:
     WaypointsNavigation() :
@@ -87,9 +95,9 @@ public:
                 for(int i=0; i < wp_node->size(); i++){
                     geometry_msgs::PointStamped point;
 
-                    point.point.x = (*wp_node)[i]["point"]["x"].as<double>();
-                    point.point.y = (*wp_node)[i]["point"]["y"].as<double>();
-                    point.point.z = (*wp_node)[i]["point"]["z"].as<double>();
+                    (*wp_node)[i]["point"]["x"] >> point.point.x;
+                    (*wp_node)[i]["point"]["y"] >> point.point.y;
+                    (*wp_node)[i]["point"]["z"] >> point.point.z;
 
                     waypoints_.push_back(point);
 
@@ -102,14 +110,14 @@ public:
             const YAML::Node *fp_node = fp_node_tmp ? &fp_node_tmp : NULL;
 
             if(fp_node != NULL){
-                finish_pose_.position.x = (*fp_node)["pose"]["position"]["x"].as<double>();
-                finish_pose_.position.y = (*fp_node)["pose"]["position"]["y"].as<double>();
-                finish_pose_.position.z = (*fp_node)["pose"]["position"]["z"].as<double>();
+                (*fp_node)["pose"]["position"]["x"] >> finish_pose_.position.x;
+                (*fp_node)["pose"]["position"]["y"] >> finish_pose_.position.y;
+                (*fp_node)["pose"]["position"]["z"] >> finish_pose_.position.z;
 
-                finish_pose_.orientation.x = (*fp_node)["pose"]["orientation"]["x"].as<double>();
-                finish_pose_.orientation.y = (*fp_node)["pose"]["orientation"]["y"].as<double>();
-                finish_pose_.orientation.z = (*fp_node)["pose"]["orientation"]["z"].as<double>();
-                finish_pose_.orientation.w = (*fp_node)["pose"]["orientation"]["w"].as<double>();
+                (*fp_node)["pose"]["orientation"]["x"] >> finish_pose_.orientation.x;
+                (*fp_node)["pose"]["orientation"]["y"] >> finish_pose_.orientation.y;
+                (*fp_node)["pose"]["orientation"]["z"] >> finish_pose_.orientation.z;
+                (*fp_node)["pose"]["orientation"]["w"] >> finish_pose_.orientation.w;
             }else{
                 return false;
             }
