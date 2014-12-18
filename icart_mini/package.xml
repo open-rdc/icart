@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package>
   <name>icart_mini</name>
-  <version>0.1.1</version>
+  <version>0.1.2</version>
   <description>This package provides packages related to navigation of i-Cart mini.</description>
   <maintainer email="method_aspect_card@yahoo.co.jp">Daiki Maekawa</maintainer>
   <author>Daiki Maekawa</author>
