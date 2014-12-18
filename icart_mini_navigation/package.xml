@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package>
   <name>icart_mini_navigation</name>
-  <version>0.1.1</version>
+  <version>0.1.2</version>
   <description>The icart_mini_navigation package</description>
 
   <maintainer email="method_aspect_card@yahoo.co.jp">Daiki Maekawa</maintainer>
