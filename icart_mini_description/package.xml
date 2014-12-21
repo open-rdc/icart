@@ -5,6 +5,7 @@
   <description>The icart_mini_description package</description>
 
   <maintainer email="method_aspect_card@yahoo.co.jp">Daiki Maekawa</maintainer>
+  <author email="method_aspect_card@yahoo.co.jp">Daiki Maekawa</author>
   <url type="website">http://wiki.ros.org/icart_mini_description</url>
   <license>BSD</license>
 
