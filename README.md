@@ -3,8 +3,8 @@ icart_mini
 
 | Repository | Issue
 | --- | --- |
-| icart_mini | [![Stories in Progress](https://badge.waffle.io/open-rdc/icart_mini.svg?label=in progress&title=In Progress)](http://waffle.io/open-rdc/icart_mini) |
-| TsukubaChallenge | [![Stories in Progress](https://badge.waffle.io/open-rdc/TsukubaChallenge.svg?label= in progress&title=In Progress)](http://waffle.io/open-rdc/TsukubaChallenge) |
+| [icart_mini](https://github.com/open-rdc/icart_mini) | [![Stories in Progress](https://badge.waffle.io/open-rdc/icart_mini.svg?label=in progress&title=In Progress)](http://waffle.io/open-rdc/icart_mini) |
+| [TsukubaChallenge](https://github.com/open-rdc/TsukubaChallenge) | [![Stories in Progress](https://badge.waffle.io/open-rdc/TsukubaChallenge.svg?label= in progress&title=In Progress)](http://waffle.io/open-rdc/TsukubaChallenge) |
 
 This package provides packages related to navigation of i-Cart mini in Tsukuba Challenge.
 
@@ -28,10 +28,6 @@ $ catkin_make
 ## Usage
 
 Please see [the icart_mini page on the ROS wiki](http://wiki.ros.org/icart_mini) for documentation.
-
-## Task Management
-
-https://github.com/open-rdc/TsukubaChallenge
 
 ## License
 
