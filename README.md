@@ -1,7 +1,7 @@
 icart_mini
 =================
 
-[![Stories in Ready](https://badge.waffle.io/open-rdc/icart_mini.svg?label=in progress&title=InProgress)](http://waffle.io/open-rdc/icart_mini)
+[![Stories in Ready](https://badge.waffle.io/open-rdc/icart_mini.svg?label=in progress&title=In Progress)](http://waffle.io/open-rdc/icart_mini)
 
 This package provides packages related to navigation of i-Cart mini in Tsukuba Challenge.
 
