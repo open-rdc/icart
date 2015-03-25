@@ -3,7 +3,7 @@
   <name>icart_mini</name>
   <version>0.1.2</version>
   <description>This package provides packages related to navigation of i-Cart mini.</description>
-  <maintainer email="method_aspect_card@yahoo.co.jp">Daiki Maekawa</maintainer>
+  <maintainer email="d.maekawa@rapyuta-robotics.com">Daiki Maekawa</maintainer>
   <author>Daiki Maekawa</author>
   <url type="website">http://wiki.ros.org/icart_mini</url>
   <license>BSD</license>
