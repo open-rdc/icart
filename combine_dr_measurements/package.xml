@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package>
   <name>combine_dr_measurements</name>
-  <version>0.1.2</version>
+  <version>0.1.3</version>
   <description>The combine_dr_measurements package</description>
 
   <maintainer email="method_aspect_card@yahoo.co.jp">Daiki Maekawa</maintainer>
