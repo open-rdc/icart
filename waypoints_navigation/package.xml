@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package>
   <name>waypoints_navigation</name>
-  <version>0.1.2</version>
+  <version>0.1.3</version>
   <description>The waypoints_navigation package</description>
 
   <maintainer email="method_aspect_card@yahoo.co.jp">Daiki Maekawa</maintainer>
