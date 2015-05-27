@@ -6,7 +6,7 @@
   <xacro:property name="camera_link" value="0.05"/> <!-- Size of square 'camera' box -->
   <xacro:property name="hokuyo_link" value="0.1" /> <!-- Size of square 'hokuyo' box -->
 
-  <xacro:property name="velodyne_link" value="0.1" /> <!-- Size of square 'hokuyo' box -->
+  <xacro:property name="velodyne_link" value="0.1" /> <!-- Size of square 'velodyne' box -->
   
   <!-- Import all Gazebo-customization elements, including Gazebo colors -->
   <xacro:include filename="$(find icart_mini_description)/urdf/icart_mini.gazebo" />
