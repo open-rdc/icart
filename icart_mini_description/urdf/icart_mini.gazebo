@@ -142,6 +142,7 @@
         <gaussianNoise>0.02</gaussianNoise>
         <updateRate>20</updateRate>
         <topicName>/scan2</topicName>
+        <pcl>2.0</pcl>
         <frameName>velodyne_link</frameName>
       </plugin>
     </sensor>
