@@ -110,10 +110,10 @@
       </plugin>
     </sensor>
   </gazebo>
-
-  <!-- velodyne -->
-  <gazebo reference="velodyne_link">
-      <sensor name="velodyne" type="ray">
+  
+  <!-- 3D_URG -->
+  <gazebo reference="hokuyo3d_link">
+      <sensor name="hokuyo3d" type="ray">
       <always_on>true</always_on>
       <visualize>false</visualize>
       <update_rate>40</update_rate>
@@ -136,7 +136,7 @@
         <gaussianNoise>0.02</gaussianNoise>
         <updateRate>20</updateRate>
         <topicName>/scan2</topicName>
-        <frameName>velodyne_link</frameName>
+        <frameName>Tdhokuyo_link</frameName>
       </plugin>
     </sensor>
   </gazebo>

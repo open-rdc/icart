@@ -6,7 +6,7 @@
   <xacro:property name="camera_link" value="0.05"/> <!-- Size of square 'camera' box -->
   <xacro:property name="hokuyo_link" value="0.1" /> <!-- Size of square 'hokuyo' box -->
 
-  <xacro:property name="velodyne_link" value="0.1" /> <!-- Size of square '3durg' box -->
+  <xacro:property name="hokuyo3d_link" value="0.1" /> <!-- Size of square '3durg' box -->
   
   <!-- Import all Gazebo-customization elements, including Gazebo colors -->
   <xacro:include filename="$(find icart_mini_description)/urdf/icart_mini.gazebo" />
@@ -160,7 +160,7 @@
     <child link="hokuyo_link"/>
   </joint>
 
-    <link name="hokuyo_link">
+  <link name="hokuyo_link">
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
@@ -182,18 +182,18 @@
     </inertial>
   </link>
   
-  <joint name="velodyne_joint" type="fixed">
+  <joint name="hokuyo3d_joint" type="fixed">
     <axis xyz="0 1 0"/>
-    <origin xyz="0.243 0 0.5" rpy="0 0.4 0"/>
+    <origin xyz="0.27 0 0.35" rpy="0 0.034 0"/>
     <parent link="base_link"/>
-    <child link="velodyne_link"/>
+    <child link="hokuyo3d_link"/>
   </joint>
 
-  <link name="velodyne_link">
+  <link name="hokuyo3d_link">
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <box size="${velodyne_link} ${velodyne_link} ${velodyne_link}"/>
+        <box size="${hokuyo3d_link} ${hokuyo3d_link} ${hokuyo3d_link}"/>
       </geometry>
     </collision>
 
