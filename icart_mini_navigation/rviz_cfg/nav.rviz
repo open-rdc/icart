@@ -6,8 +6,7 @@ Panels:
       Expanded:
         - /Global Options1
         - /Status1
-        - /PointCloud21
-        - /PoseArray2
+        - /PointCloud1
       Splitter Ratio: 0.5
     Tree Height: 417
   - Class: rviz/Selection
@@ -54,10 +53,10 @@ Visualization Manager:
       Class: rviz/Map
       Color Scheme: map
       Draw Behind: false
-      Enabled: false
+      Enabled: true
       Name: Map
       Topic: /map
-      Value: false
+      Value: true
     - Alpha: 1
       Class: rviz/RobotModel
       Collision Enabled: false
@@ -78,6 +77,11 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
+        hokuyo3d_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
         hokuyo_link:
           Alpha: 1
           Show Axes: false
@@ -89,11 +93,6 @@ Visualization Manager:
           Show Trail: false
           Value: true
         right_wheel:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        velodyne_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -129,7 +128,7 @@ Visualization Manager:
       Enabled: true
       Invert Rainbow: false
       Max Color: 170; 0; 0
-      Max Intensity: 2.7756e-17
+      Max Intensity: 1.81902e-12
       Min Color: 0; 85; 0
       Min Intensity: 0
       Name: LaserScan
@@ -173,7 +172,7 @@ Visualization Manager:
       Value: true
     - Alpha: 0.7
       Class: rviz/Map
-      Color Scheme: map
+      Color Scheme: costmap
       Draw Behind: false
       Enabled: true
       Name: Map
@@ -206,7 +205,7 @@ Visualization Manager:
       Color: 255; 255; 255
       Color Transformer: Intensity
       Decay Time: 0
-      Enabled: false
+      Enabled: true
       Invert Rainbow: false
       Max Color: 255; 255; 255
       Max Intensity: 999999
@@ -217,12 +216,12 @@ Visualization Manager:
       Queue Size: 10
       Selectable: true
       Size (Pixels): 3
-      Size (m): 0.01
+      Size (m): 0.1
       Style: Flat Squares
-      Topic: /assembled_cloud
+      Topic: /filtered_cloud
       Use Fixed Frame: true
       Use rainbow: true
-      Value: false
+      Value: true
     - Alpha: 1
       Autocompute Intensity Bounds: true
       Autocompute Value Bounds:
@@ -238,9 +237,9 @@ Visualization Manager:
       Enabled: true
       Invert Rainbow: false
       Max Color: 255; 255; 255
-      Max Intensity: 4096
+      Max Intensity: 1.81902e-12
       Min Color: 0; 0; 0
-      Min Intensity: 0
+      Min Intensity: 6.72623e-44
       Name: PointCloud2
       Position Transformer: XYZ
       Queue Size: 10
@@ -248,17 +247,17 @@ Visualization Manager:
       Size (Pixels): 3
       Size (m): 0.01
       Style: Flat Squares
-      Topic: /octomap_point_cloud_centers
+      Topic: /cloud_pcd
       Use Fixed Frame: true
       Use rainbow: true
       Value: true
     - Arrow Length: 0.3
       Class: rviz/PoseArray
       Color: 255; 25; 0
-      Enabled: true
+      Enabled: false
       Name: PoseArray
       Topic: /normal_vectors
-      Value: true
+      Value: false
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -283,22 +282,22 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 39.3999
+      Distance: 18.3527
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.06
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 10.2473
-        Y: 9.32996
-        Z: -2.23588
+        X: 4.21895
+        Y: 6.04149
+        Z: -5.65022
       Name: Current View
       Near Clip Distance: 0.01
-      Pitch: 0.474798
+      Pitch: 1.2098
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 3.24542
+      Yaw: 3.14542
     Saved: ~
 Window Geometry:
   Displays:
@@ -316,5 +315,5 @@ Window Geometry:
   Views:
     collapsed: false
   Width: 1278
-  X: 1401
-  Y: 133
+  X: 38
+  Y: 66
