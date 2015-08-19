@@ -112,26 +112,32 @@
   </gazebo>
   <!-- 3D URG -->
   <gazebo reference="hokuyo3d_link">
-      <sensor name="hokuyo3d" type="ray">
+      <sensor name="velodyne" type="ray">
       <always_on>true</always_on>
       <visualize>false</visualize>
-      <update_rate>40</update_rate>
+      <update_rate>5</update_rate>
       <ray>
         <scan>
           <horizontal>
-            <samples>720</samples>
+            <samples>210</samples>
             <resolution>1</resolution>
-            <min_angle>-1.570796</min_angle>
-            <max_angle>1.570796</max_angle>
+            <min_angle>-1.8325</min_angle>
+            <max_angle>1.8325</max_angle>
           </horizontal>
+          <vertical>
+              <samples>49</samples>
+              <resolution>1</resolution>
+              <min_angle>-0.0872</min_angle>
+              <max_angle>0.6105</max_angle>
+          </vertical>
         </scan>
         <range>
-          <min>0.1</min>
-          <max>30</max>
-          <resolution>0.01</resolution>
+          <min>0.3</min>
+          <max>20</max>
+          <resolution>0.02</resolution>
         </range>
       </ray>
-      <plugin name="laser_controller" filename="libgazebo_ros_laser.so">
+      <plugin name="laser_controller" filename="libgazebo_ros_block_laser.so">
         <gaussianNoise>0.02</gaussianNoise>
         <updateRate>20</updateRate>
         <topicName>/scan2</topicName>
