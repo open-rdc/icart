@@ -6,7 +6,6 @@ Panels:
       Expanded:
         - /Global Options1
         - /Status1
-        - /PointCloud1
       Splitter Ratio: 0.5
     Tree Height: 417
   - Class: rviz/Selection
@@ -27,7 +26,7 @@ Panels:
     Experimental: false
     Name: Time
     SyncMode: 0
-    SyncSource: LaserScan
+    SyncSource: ""
 Visualization Manager:
   Class: ""
   Displays:
@@ -315,5 +314,5 @@ Window Geometry:
   Views:
     collapsed: false
   Width: 1278
-  X: 38
-  Y: 66
+  X: 525
+  Y: 137
