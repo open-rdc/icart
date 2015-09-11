@@ -34,7 +34,7 @@ The following will show the commands needed to bring up either real or simulated
 $ roslaunch icart_mini_gazebo icart_mini.launch
 ```
 
-Bring up the real robot
+* Bring up the real robot
 
 ```sh
 $ ./icart-mini.sh
