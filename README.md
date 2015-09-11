@@ -1,10 +1,7 @@
 icart_mini
 =================
 
-| Repository | Issue
-| --- | --- |
-| [icart_mini](https://github.com/open-rdc/icart_mini) | [![Stories in Progress](https://badge.waffle.io/open-rdc/icart_mini.svg?label=in progress&title=In Progress)](http://waffle.io/open-rdc/icart_mini) |
-| [TsukubaChallenge](https://github.com/open-rdc/TsukubaChallenge) | [![Stories in Progress](https://badge.waffle.io/open-rdc/TsukubaChallenge.svg?label= in progress&title=In Progress)](http://waffle.io/open-rdc/TsukubaChallenge) |
+[![Stories in Progress](https://badge.waffle.io/open-rdc/icart_mini.svg?label=in progress&title=In Progress)](http://waffle.io/open-rdc/icart_mini)
 
 This package provides packages related to navigation of i-Cart mini in Tsukuba Challenge.
 
