@@ -24,11 +24,26 @@ $ catkin_make
 
 ## Usage
 
-Please see [the icart_mini page on the ROS Index](http://rosindex.github.io/r/icart_mini/github-open-rdc-icart_mini/) for documentation.
+### Bring up the real/simulated robot
+
+The following will show the commands needed to bring up either real or simulated robots.
+
+* Bring up the simulated robot
+
+```sh
+$ roslaunch icart_mini_gazebo icart_mini.launch
+```
+
+Bring up the real robot
+
+```sh
+$ ./icart-mini.sh
+$ roslaunch icart_mini_driver icart_mini_drive.launch
+```
+
+Please see [the icart_mini page on the ROS Index](http://rosindex.github.io/r/icart_mini/github-open-rdc-icart_mini/) for more info.
 
 ## License
 
 Copyright (c) 2014, Robot Design and Control Lab. (BSD License)
-
-See LICENSE for more info.
 
