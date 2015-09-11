@@ -41,6 +41,28 @@ $ ./icart-mini.sh
 $ roslaunch icart_mini_driver icart_mini_drive.launch
 ```
 
+### Teleoperation with a joystick
+
+```sh
+$ roslaunch icart_mini_driver teleop_joy.launch
+```
+
+### Build map
+
+```sh
+$ roslaunch icart_mini_navigation build_map_teleop.launch
+```
+
+During building a map, waypoints are recorded by pressing the No.1 button of the joystick.
+
+When you set 2DNavGoal at the goal point on the RViz, waypoints will be saved and then waypoints file stored in icart_mini_navigation/waypoints_cfg/waypoints.yaml is overwritten. So that, the navigation system can be automatically load waypoints configuration.
+
+If you want to save the map, run a map_saver node like the following command.
+
+```sh
+$ rosrun map_server map_saver -f filename
+```
+
 Please see [the icart_mini page on the ROS Index](http://rosindex.github.io/r/icart_mini/github-open-rdc-icart_mini/) for more info.
 
 ## License
