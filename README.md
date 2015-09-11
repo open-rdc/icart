@@ -27,7 +27,7 @@ $ catkin_make
 
 ## Usage
 
-Please see [the icart_mini page on the ROS wiki](http://wiki.ros.org/icart_mini) for documentation.
+Please see [the icart_mini page on the ROS Index](http://rosindex.github.io/r/icart_mini/github-open-rdc-icart_mini/) for documentation.
 
 ## License
 
