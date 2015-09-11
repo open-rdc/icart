@@ -89,11 +89,11 @@ $ roslaunch icart_mini_navigation play_waypoints_nav.launch
 
 * Waypoint Navigation with an optional map file
 
-A map name must be specified in the full path.
-
 ```sh
 $ roslaunch icart_mini_navigation play_waypoints_nav.launch map_file:=filename.yaml
 ```
+
+A map name must be specified in the full path.
 
 * Run the navigation system with a static map
 
