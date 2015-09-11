@@ -63,6 +63,52 @@ If you want to save the map, run a map_saver node like the following command.
 $ rosrun map_server map_saver -f filename
 ```
 
+### Record the waypoints
+
+* Using the PublishPoint message on the RViz
+
+```sh
+$ roslaunch icart_mini_navigation record_waypoints_viz.launch map_file:=filename.yaml
+```
+
+* Using a joystick
+
+```sh
+$ roslaunch icart_mini_navigation record_waypoints_joy.launch map_file:=filename.yaml
+```
+
+Note that filename must be specified in the full path.
+
+### Navigation
+
+* Waypoint Navigation
+
+```sh
+$ roslaunch icart_mini_navigation play_waypoints_nav.launch
+```
+
+* Waypoint Navigation with an optional map file
+
+A map name must be specified in the full path.
+
+```sh
+$ roslaunch icart_mini_navigation play_waypoints_nav.launch map_file:=filename.yaml
+```
+
+* Run the navigation system with a static map
+
+```sh
+$ roslaunch icart_mini_navigation nav_static_map.launch
+```
+
+* Enable the starting flag
+
+```sh
+$ rostopic pub -1 /syscommand std_msgs/String "start"
+```
+
+Don't forget to turn off the teleoperation, it might interfere with the robot's commands.
+
 Please see [the icart_mini page on the ROS Index](http://rosindex.github.io/r/icart_mini/github-open-rdc-icart_mini/) for more info.
 
 ## License
