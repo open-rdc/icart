@@ -5,6 +5,8 @@ icart_mini
 
 This package provides packages related to navigation of i-Cart mini in Tsukuba Challenge.
 
+![i-Cart mini](http://wiki.ros.org/Robots/icart_mini?action=AttachFile&do=get&target=icart_mini.png)
+
 [![Throughput Graph](https://graphs.waffle.io/open-rdc/icart_mini/throughput.svg)](https://waffle.io/open-rdc/icart_mini/metrics) 
 
 ## Install
