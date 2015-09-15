@@ -147,9 +147,13 @@ public:
             }else{
                 return false;
             }
-
-            const YAML::Node &fp_node_tmp = node["finish_pose"];
-            const YAML::Node *fp_node = fp_node_tmp ? &fp_node_tmp : NULL;
+            
+            #ifdef NEW_YAMLCPP
+                const YAML::Node &fp_node_tmp = node["finish_pose"];
+                const YAML::Node *fp_node = fp_node_tmp ? &fp_node_tmp : NULL;
+            #else
+                const YAML::Node *fp_node = node.FindValue("finish_pose");
+            #endif
 
             if(fp_node != NULL){
                 (*fp_node)["pose"]["position"]["x"] >> finish_pose_.position.x;
