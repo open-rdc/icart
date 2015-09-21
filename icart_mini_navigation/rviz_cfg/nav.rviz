@@ -26,7 +26,7 @@ Panels:
     Experimental: false
     Name: Time
     SyncMode: 0
-    SyncSource: ""
+    SyncSource: LaserScan
 Visualization Manager:
   Class: ""
   Displays:
@@ -127,7 +127,7 @@ Visualization Manager:
       Enabled: true
       Invert Rainbow: false
       Max Color: 170; 0; 0
-      Max Intensity: 1.81902e-12
+      Max Intensity: 2.7756e-17
       Min Color: 0; 85; 0
       Min Intensity: 0
       Name: LaserScan
@@ -144,10 +144,10 @@ Visualization Manager:
     - Arrow Length: 0.3
       Class: rviz/PoseArray
       Color: 255; 25; 0
-      Enabled: true
+      Enabled: false
       Name: PoseArray
       Topic: /particlecloud
-      Value: true
+      Value: false
     - Alpha: 1
       Buffer Length: 1
       Class: rviz/Path
@@ -281,7 +281,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 18.3527
+      Distance: 19.6798
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.06
         Stereo Focal Distance: 1
@@ -293,10 +293,10 @@ Visualization Manager:
         Z: -5.65022
       Name: Current View
       Near Clip Distance: 0.01
-      Pitch: 1.2098
+      Pitch: 1.1798
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 3.14542
+      Yaw: 3.15542
     Saved: ~
 Window Geometry:
   Displays:
@@ -314,5 +314,5 @@ Window Geometry:
   Views:
     collapsed: false
   Width: 1278
-  X: 525
-  Y: 137
+  X: 1411
+  Y: 312
