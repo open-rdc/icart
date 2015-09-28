@@ -40,3 +40,8 @@ target_link_libraries(icart_mini_driver_node
     ${YPSPUR_LIBRARY}
 )
 
+install(FILES
+    scripts/icart-mini
+    DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/scripts
+)
+
