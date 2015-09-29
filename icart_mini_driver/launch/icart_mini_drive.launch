@@ -5,6 +5,8 @@
   <arg name="scan_dev" default="/dev/sensors/hokuyo_urg"/>
   <arg name="imu_dev" default="/dev/sensors/imu"/>
   
+  <node name="ypspur_coordinator_bridge" pkg="icart_mini_driver" type="ypspur_coordinator_bridge"/>
+ 
   <param name="robot_description"
          command="$(find xacro)/xacro.py '$(find icart_mini_description)/urdf/icart_mini.xacro'" />
   
