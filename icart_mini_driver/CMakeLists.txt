@@ -41,7 +41,7 @@ target_link_libraries(icart_mini_driver_node
 )
 
 install(FILES
-    scripts/icart-mini
+    scripts/ypspur_coordinator_bridge
     DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/scripts
 )
 
