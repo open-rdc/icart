@@ -18,8 +18,9 @@
   </include>
 
   <!-- Load the URDF into the ROS Parameter Server -->
+  <arg name="robot_description" default="$(find icart_mini_description)/urdf/icart_mini.xacro" />
   <param name="robot_description"
-         command="$(find xacro)/xacro.py '$(find icart_mini_description)/urdf/icart_mini.xacro'" />
+         command="$(find xacro)/xacro.py '$(arg robot_description)'" />
 
   <!-- Run a python script to the send a service call to gazebo_ros to spawn a URDF robot -->
   <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
