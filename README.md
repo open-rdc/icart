@@ -39,7 +39,6 @@ $ roslaunch icart_mini_gazebo icart_mini.launch
 * Bring up the real robot
 
 ```sh
-$ ./icart-mini.sh
 $ roslaunch icart_mini_driver icart_mini_drive.launch
 ```
 
