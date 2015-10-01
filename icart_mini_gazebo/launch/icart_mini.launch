@@ -9,10 +9,11 @@
   
   <!-- Load the URDF into the ROS Parameter Server -->
   <arg name="model" default="$(find xacro)/xacro.py '$(find icart_mini_description)/urdf/icart_mini.xacro'" />
+  <arg name="world" default="$(find icart_mini_gazebo)/worlds/empty.world"/>
 
   <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
-    <arg name="world_name" value="$(find icart_mini_gazebo)/worlds/empty.world"/>
+    <arg name="world_name" value="$(arg world)"/>
     <arg name="debug" value="$(arg debug)" />
     <arg name="gui" value="$(arg gui)" />
     <arg name="paused" value="$(arg paused)"/>
