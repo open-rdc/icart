@@ -6,8 +6,10 @@
   <xacro:property name="camera_link" value="0.05"/> <!-- Size of square 'camera' box -->
   <xacro:property name="hokuyo_link" value="0.1" /> <!-- Size of square 'hokuyo' box -->
 
+  <xacro:property name="hokuyo3d_link" value="0.1" /> <!-- Size of square '3durg' box -->
+  
   <!-- Import all Gazebo-customization elements, including Gazebo colors -->
-  <xacro:include filename="$(find icart_mini_description)/urdf/icart_mini.gazebo" />
+  <xacro:include filename="$(find icart_mini_description)/urdf/icart_mini_with_hokuyo3d.gazebo" />
   <!-- Import Rviz colors -->
   <xacro:include filename="$(find icart_mini_description)/urdf/materials.xacro" />
 
@@ -180,6 +182,36 @@
     </inertial>
   </link>
   
+  <joint name="hokuyo3d_joint" type="fixed">
+    <axis xyz="0 1 0"/>
+    <origin xyz="0.27 0 0.35" rpy="0 0.034 0"/>
+    <parent link="base_link"/>
+    <child link="hokuyo3d_link"/>
+  </joint>
+
+  <link name="hokuyo3d_link">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="${hokuyo3d_link} ${hokuyo3d_link} ${hokuyo3d_link}"/>
+      </geometry>
+    </collision>
+
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://icart_mini_description/meshes/hokuyo.dae"/>
+      </geometry>
+    </visual>
+
+    <inertial>
+      <mass value="0.0001"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001"/>
+    </inertial>
+  </link>
+
+
   <joint name="camera_joint" type="fixed">
     <axis xyz="0 1 0" />
     <origin xyz="0 0 0.2" rpy="0 0 0"/>
