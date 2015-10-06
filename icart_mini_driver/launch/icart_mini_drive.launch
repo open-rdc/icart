@@ -2,8 +2,12 @@
 
 <launch>
   <arg name="scan_frame" default="/hokuyo_link"/>
-  <arg name="scan_dev" default="/dev/sensors/hokuyo_urg"/>
-  <arg name="imu_dev" default="/dev/sensors/imu"/>
+  <!--arg name="scan_dev" default="/dev/sensors/hokuyo_urg"/-->
+  <!--arg name="imu_dev" default="/dev/sensors/imu"/-->
+
+  <!--Select the device name by the robot-->
+  <arg name="sensor_dev" default="$(find icart_mini_dirver)/launch/icart_mini_dev.launch"/>
+  <include file="$(arg sensor_dev)"/>
   
   <node name="ypspur_coordinator_bridge" pkg="icart_mini_driver" type="ypspur_coordinator_bridge"/>
  

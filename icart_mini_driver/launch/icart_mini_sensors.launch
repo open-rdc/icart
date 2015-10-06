@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+
+<launch>
+  <arg name="scan_dev" default="/dev/sensors/hokuyo_urg"/>
+  <arg name="imu_dev" default="/dev/sensors/imu"/>
+<launch/>
