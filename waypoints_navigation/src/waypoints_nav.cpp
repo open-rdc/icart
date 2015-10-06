@@ -59,6 +59,7 @@ class WaypointsNavigation{
 public:
     WaypointsNavigation() :
         has_activate_(false),
+        is_stop_(false),
         move_base_action_("move_base", true),
         rate_(10),
         last_moved_time_(0)
@@ -85,6 +86,7 @@ public:
         ros::NodeHandle nh;
         syscommand_sub_ = nh.subscribe("syscommand", 1, &WaypointsNavigation::syscommandCallback, this);
         cmd_vel_sub_ = nh.subscribe("icart_mini/cmd_vel", 1, &WaypointsNavigation::cmdVelCallback, this);
+        stop_point_sub_ = nh.subscribe("stop_point",1,&WaypointsNavigation::stopPointCallback, this);
         marker_pub_ = nh.advertise<visualization_msgs::MarkerArray>("visualization_marker", 10);
         clear_costmaps_srv_ = nh.serviceClient<std_srvs::Empty>("/move_base/clear_costmaps");
     }
@@ -92,6 +94,10 @@ public:
     void syscommandCallback(const std_msgs::String &msg){
         if(msg.data == "start"){
             has_activate_ = true;
+        }
+        if(msg.data == "restart"){
+            has_restart_ = true;
+            ROS_INFO_STREAM("restart command received");
         }
     }
 
@@ -107,6 +113,13 @@ public:
         }else{
             last_moved_time_ = ros::Time::now().toSec();
         }
+    }
+
+    void stopPointCallback(const geometry_msgs::PointStamped &msg){
+        is_stop_ = true;
+        stop_point_.point.x = msg.point.x;
+        stop_point_.point.y = msg.point.y;
+        stop_point_.point.z = msg.point.z;
     }
 
     bool readFile(const std::string &filename){
@@ -279,25 +292,40 @@ public:
     void run(){
         while(ros::ok()){
             if(has_activate_){
-                for(int i=0; i < waypoints_.size(); i++){
-                    ROS_INFO_STREAM("waypoint = " << waypoints_[i]);
+                std::vector<geometry_msgs::PointStamped>::iterator waypoints_it = waypoints_.begin();
+                for(waypoints_it; waypoints_it != waypoints_.end(); ++waypoints_it){
+                    if(is_stop_){
+                        waypoints_.insert(waypoints_it, stop_point_);
+                        ROS_INFO_STREAM("Stop point received");
+                    }
+                    ROS_INFO_STREAM("waypoint = " << *waypoints_it);
+
                     if(!ros::ok()) break;
                     
-                    startNavigationGL(waypoints_[i].point);
+                    startNavigationGL(waypoints_it->point);
                     double start_nav_time = ros::Time::now().toSec();
-                    while(!onNavigationPoint(waypoints_[i].point)){
+                    while(!onNavigationPoint(waypoints_it->point)){
                         double time = ros::Time::now().toSec();
                         if(time - start_nav_time > 10.0 && time - last_moved_time_ > 10.0){
                             ROS_WARN("Resend the navigation goal.");
                             std_srvs::Empty empty;
                             clear_costmaps_srv_.call(empty);
-                            startNavigationGL(waypoints_[i].point);
+                            startNavigationGL(waypoints_it->point);
                             start_nav_time = time;
                         }
                         actionlib::SimpleClientGoalState state = move_base_action_.getState();
                         sleep();
                     }
                     ROS_INFO("waypoint goal");
+                    if(is_stop_){
+                        while(!has_restart_){
+                            sleep();
+                            ROS_INFO_STREAM("Wait for restart");
+                        }
+                        ROS_INFO_STREAM("Restart");
+                        has_restart_ = false;
+                        is_stop_ = false;
+                    }
                 }
                 ROS_INFO("waypoints clear");
                 waypoints_.clear();
@@ -313,13 +341,17 @@ public:
 private:
     actionlib::SimpleActionClient<move_base_msgs::MoveBaseAction> move_base_action_;
     std::vector<geometry_msgs::PointStamped> waypoints_;
+    geometry_msgs::PointStamped stop_point_;
     geometry_msgs::Pose finish_pose_;
     bool has_activate_;
+    bool is_stop_;
+    bool has_restart_;
     std::string robot_frame_, world_frame_;
     tf::TransformListener tf_listener_;
     ros::Rate rate_;
     ros::Subscriber syscommand_sub_;
     ros::Subscriber cmd_vel_sub_;
+    ros::Subscriber stop_point_sub_;
     ros::Publisher marker_pub_;
     ros::ServiceClient clear_costmaps_srv_;
     double last_moved_time_;
