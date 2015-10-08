@@ -28,16 +28,8 @@ include_directories(
   ${yaml-cpp_INCLUDE_DIRS}
 )
 
-add_library(simple_layer
-    src/simple_layer/simple_layer.cpp
-)
-
-add_library(grid_layer
-    src/grid_layer/grid_layer.cpp
-)
-
-add_library(safe_layer
-    src/safe_layer/safe_layer.cpp
+add_library(movable_layer
+    src/movable_layer/movable_layer.cpp
 )
 
 ## Install ##
