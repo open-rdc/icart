@@ -10,6 +10,8 @@ find_package(catkin REQUIRED COMPONENTS
   actionlib
   tf
   std_msgs
+  costmap_2d
+  dynamic_reconfigure
 )
 
 find_package(PkgConfig)
@@ -26,7 +28,18 @@ include_directories(
   ${yaml-cpp_INCLUDE_DIRS}
 )
 
-#############
+add_library(simple_layer
+    src/simple_layer/simple_layer.cpp
+)
+
+add_library(grid_layer
+    src/grid_layer/grid_layer.cpp
+)
+
+add_library(safe_layer
+    src/safe_layer/safe_layer.cpp
+)
+
 ## Install ##
 #############
 

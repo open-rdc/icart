@@ -5,12 +5,12 @@ footprint: [[0.2425, 0.215], [0.2425, -0.215], [-0.2425, -0.215], [-0.2425, 0.21
 inflation_radius: 0.50
 update_frequency: 3.0
 
-#width: 5.0
-#height: 5.0
-#resolution: 0.15
+width: 5.0
+height: 5.0
+resolution: 0.15
 
-observation_sources: scan point_cloud
-
-scan: {data_type: LaserScan, topic: /scan, marking: true, clearing: true, min_obstacle_height: 0, max_obstacle_height: 1.0}
-
-point_cloud: {data_type: PointCloud, topic: /filtered_cloud, marking: true, clearing: true}
+# observation_sources: scan #point_cloud
+#
+# scan: {data_type: LaserScan, topic: /scan, marking: true, clearing: true, min_obstacle_height: 0, max_obstacle_height: 1.0}
+#
+#point_cloud: {data_type: PointCloud, topic: /obstacle_cloud, marking: true, clearing: true}
