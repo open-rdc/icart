@@ -5,29 +5,9 @@ plugins:
     - {name: scan_obstacle, type: "costmap_2d::ObstacleLayer"}
     - {name: scan_inflation, type: "costmap_2d::InflationLayer"}
 
-update_frequency: 0.25
-publish_frequency: 0.5   
-transform_tolerance: 0.5
-static_map: false
-map_type: voxel
-
-origin_z: 0.0
-z_resolution: 0.2
-z_voxels: 10
-unknown_threshold: 9
-mark_threshold: 0
-
 obstacle__range: 2.5
 max_obstacle_height: 2.0
-raytrace_rage: 3.0
-
-footprint: [[-0.325, -0.325], [-0.325, 0.325], [0.325, 0.325], [0.46, 0.0], [0.325, -0.325]]
-footprint_padding: 0.01
-
-inflation_radius: 0.55
-cost_scaling_facter: 10.0
-
-lethal_cost_threshold: 100
+raytrace_range: 3.0
 
 obstacle_layer:
      observation_sources: point_cloud
