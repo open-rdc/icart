@@ -60,6 +60,7 @@ public:
     WaypointsNavigation() :
         has_activate_(false),
         is_stop_(false),
+	in_stop_(false),
         move_base_action_("move_base", true),
         rate_(10),
         last_moved_time_(0)
@@ -294,14 +295,16 @@ public:
             if(has_activate_){
                 std::vector<geometry_msgs::PointStamped>::iterator waypoints_it = waypoints_.begin();
                 for(waypoints_it; waypoints_it != waypoints_.end(); ++waypoints_it){
-                    if(is_stop_){
-                        waypoints_.insert(waypoints_it, stop_point_);
-                        ROS_INFO_STREAM("Stop point received");
-                    }
-                    ROS_INFO_STREAM("waypoint = " << *waypoints_it);
-
                     if(!ros::ok()) break;
                     
+                    if(is_stop_ && !in_stop_){
+                    	ROS_INFO_STREAM("waypoint = " << *waypoints_it);
+                        waypoints_.insert(waypoints_it, stop_point_);
+                        ROS_INFO_STREAM("Stop point received");
+			is_stop_ = false;
+			in_stop_ = true;
+                    }
+
                     startNavigationGL(waypoints_it->point);
                     double start_nav_time = ros::Time::now().toSec();
                     while(!onNavigationPoint(waypoints_it->point)){
@@ -317,14 +320,16 @@ public:
                         sleep();
                     }
                     ROS_INFO("waypoint goal");
-                    if(is_stop_){
+                    
+                    ROS_INFO_STREAM("waypoint = " << *waypoints_it);
+		    if(!is_stop_ && in_stop_ ){
                         while(!has_restart_){
                             sleep();
                             ROS_INFO_STREAM("Wait for restart");
                         }
                         ROS_INFO_STREAM("Restart");
                         has_restart_ = false;
-                        is_stop_ = false;
+			in_stop_ = false;
                     }
                 }
                 ROS_INFO("waypoints clear");
@@ -345,6 +350,7 @@ private:
     geometry_msgs::Pose finish_pose_;
     bool has_activate_;
     bool is_stop_;
+    bool in_stop_;
     bool has_restart_;
     std::string robot_frame_, world_frame_;
     tf::TransformListener tf_listener_;
