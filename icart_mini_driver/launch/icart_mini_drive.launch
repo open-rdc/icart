@@ -1,12 +1,13 @@
 <?xml version="1.0"?>
 
 <launch>
-  <arg name="scan_frame" default="/hokuyo_link"/>
-  <arg name="scan_dev"   default="/dev/sensors/hokuyo_urg"/>
-  <arg name="imu_dev"    default="/dev/sensors/imu"/>
-  <arg name="model"      default="$(find xacro)/xacro.py '$(find icart_mini_description)/urdf/icart_mini.xacro'"/>
+  <arg name="scan_frame"    default="/hokuyo_link"/>
+  <arg name="scan_dev"      default="/dev/sensors/hokuyo_urg"/>
+  <arg name="imu_dev"       default="/dev/sensors/imu"/>
+  <arg name="model"         default="$(find xacro)/xacro.py '$(find icart_mini_description)/urdf/icart_mini.xacro'"/>
+  <arg name="ypspur_params" default="/usr/local/share/robot-params/icart-mini.param"/>
   
-  <node name="ypspur_coordinator_bridge" pkg="icart_mini_driver" type="ypspur_coordinator_bridge"/>
+  <node name="ypspur_coordinator_bridge" pkg="icart_mini_driver" type="ypspur_coordinator_bridge" args="$(arg ypspur_params)" output="screen"/>
  
   <param name="robot_description" command="$(arg model)" />
   
