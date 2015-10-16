@@ -27,12 +27,6 @@
   <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
         args="-urdf -model icart_mini -param robot_description"/>
   
-  <node name="combine_dr_measurements" pkg="combine_dr_measurements" type="odometry_publisher">
-    <param name="max_update_rate" value="20"/>
-    <remap from="odom" to="/icart_mini/odom"/>
-    <remap from="imu" to="/icart_mini/imu"/>
-  </node>
-
   <!-- ros_control icart_mini launch file -->
   <include file="$(find icart_mini_control)/launch/icart_mini_control.launch" />
 
