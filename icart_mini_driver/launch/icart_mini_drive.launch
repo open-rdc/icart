@@ -23,12 +23,6 @@
 
   <node name="icart_mini_driver_node" pkg="icart_mini_driver" output="screen" type="icart_mini_driver_node"/>
   
-  <node name="combine_dr_measurements" pkg="combine_dr_measurements" type="odometry_publisher">
-    <param name="max_update_rate" value="80"/>
-    <remap from="odom" to="/icart_mini/odom"/>
-    <remap from="imu" to="imu"/>
-  </node>
-
   <include file="$(find icart_mini_control)/launch/icart_mini_control.launch" />
   
 </launch>
