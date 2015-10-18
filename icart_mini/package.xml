@@ -8,14 +8,12 @@
   <url type="website">http://wiki.ros.org/icart_mini</url>
   <license>BSD</license>
   <buildtool_depend>catkin</buildtool_depend>
-  <run_depend>force_rotate_recovery</run_depend>
   <run_depend>icart_mini_description</run_depend>
   <run_depend>icart_mini_navigation</run_depend>
   <run_depend>icart_mini_driver</run_depend>
   <run_depend>icart_mini_gazebo</run_depend>
   <run_depend>icart_mini_control</run_depend>
   <run_depend>waypoints_navigation</run_depend>
-  <run_depend>combine_dr_measurements</run_depend>
 
   <export>
     <metapackage/>
