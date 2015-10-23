@@ -3,6 +3,8 @@ icart_mini
 
 [![Stories in Progress](https://badge.waffle.io/open-rdc/icart_mini.svg?label=in progress&title=In Progress)](http://waffle.io/open-rdc/icart_mini)
 
+[![Throughput Graph](https://graphs.waffle.io/open-rdc/icart_mini/throughput.svg)](https://waffle.io/open-rdc/icart_mini/metrics) 
+
 This package provides packages related to i-Cart mini.
 
 ![i-Cart mini](http://wiki.ros.org/Robots/icart_mini?action=AttachFile&do=get&target=icart_mini.png)
@@ -12,8 +14,6 @@ This package provides packages related to i-Cart mini.
 ```sh
 $ roslaunch icart_mini_driver teleop_joy.launch
 ```
-
-[![Throughput Graph](https://graphs.waffle.io/open-rdc/icart_mini/throughput.svg)](https://waffle.io/open-rdc/icart_mini/metrics) 
 
 ## License
 
