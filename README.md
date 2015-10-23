@@ -7,9 +7,9 @@ icart_mini
 
 ## About
 
-![i-Cart mini](http://wiki.ros.org/Robots/icart_mini?action=AttachFile&do=get&target=icart_mini.png)
-
 This package provides packages related to i-Cart mini.
+
+![i-Cart mini](http://wiki.ros.org/Robots/icart_mini?action=AttachFile&do=get&target=icart_mini.png)
 
 ## Teleoperation with a joystick
 
