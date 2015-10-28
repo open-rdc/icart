@@ -3,8 +3,8 @@
     local-name: icart_mini
     version: indigo-devel
 - git:
-    uri: https://github.com/open-rdc/adis_imu_drivers
-    local-name: adis_imu_drivers
+    uri: https://github.com/open-rdc/cit_adis_imu/
+    local-name: cit_adis_imu
     version: indigo-devel
 - git:
     uri: https://github.com/ros-controls/ros_controllers
