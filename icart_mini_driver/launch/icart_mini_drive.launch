@@ -16,7 +16,7 @@
     <param name="port" value="$(arg scan_dev)"/>
   </node>
 
-  <node pkg="imu" type="imu" name="imu">
+  <node pkg="cit_adis_imu" type="imu_node" name="imu">
     <param name="port_name" value="$(arg imu_dev)"/>
     <param name="z_axis_dir" value="-1"/>
   </node>
