@@ -6,18 +6,16 @@
   <xacro:property name="camera_link" value="0.05"/> <!-- Size of square 'camera' box -->
   <xacro:property name="hokuyo_link" value="0.1" /> <!-- Size of square 'hokuyo' box -->
 
-  <!-- Import all Gazebo-customization elements, including Gazebo colors -->
-  <xacro:include filename="$(find icart_mini_description)/urdf/icart_mini.gazebo" />
   <!-- Import Rviz colors -->
   <xacro:include filename="$(find icart_mini_description)/urdf/materials.xacro" />
 
   <!-- Used for fixing robot to Gazebo 'base_link' -->
-  <!--link name="world"/>
+  <link name="world"/>
 
   <joint name="continuous" type="continuous">
     <parent link="world"/>
     <child link="base_link"/>
-  </joint-->
+  </joint>
 
   <!-- Base Link -->
   <link name="base_link">
@@ -208,7 +206,6 @@
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001"/>
     </inertial>    
-
   </link>
  
   <transmission name="tran1">
@@ -232,5 +229,13 @@
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission>
+
+  <!-- Import all Gazebo-customization elements, including Gazebo colors -->
+  <xacro:include filename="$(find icart_mini_description)/urdf/icart_mini.gazebo"/>
+  <xacro:include filename="$(find icart_mini_description)/urdf/sensors/imu.urdf.xacro"/>
+
+  <xacro:sensor_imu name="imu" parent="base_link">
+      <origin xyz="-0.18 0.0 0.170" rpy="0 0 0"/>
+  </xacro:sensor_imu>
 
 </robot>
