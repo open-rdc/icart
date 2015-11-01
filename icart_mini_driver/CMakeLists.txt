@@ -20,13 +20,13 @@ include_directories(
     ${YPSPUR_INCLUDE_DIRS}
 )
 
-#find_package(YPSpur)
+find_package(YPSpur)
 
 add_executable(icart_mini_driver_node src/icart_mini_driver_node.cpp)
 
 target_link_libraries(icart_mini_driver_node
     ${catkin_LIBRARIES}
-    ${YPSPUR_LIBRARIES}
+    ${YPSPUR_LIBRARY_DIRS}
 )
 
 install(FILES
