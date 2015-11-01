@@ -5,7 +5,6 @@ find_package(catkin REQUIRED COMPONENTS
     roscpp 
     hardware_interface
     controller_manager
-    ypspur
 )
 
 catkin_package(
