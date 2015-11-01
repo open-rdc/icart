@@ -26,12 +26,14 @@
   <build_depend>controller_manager</build_depend>
   <build_depend>teleop_twist_joy</build_depend>
   <build_depend>joy</build_depend>
+  <build_depend>ypspur</build_depend>
   <run_depend>controller_manager</run_depend>
   <run_depend>hardware_interface</run_depend>
   <run_depend>roscpp</run_depend>
   <run_depend>teleop_twist_joy</run_depend>
   <run_depend>joy</run_depend>
   <run_depend>hokuyo_node</run_depend>
+  <run_depend>ypspur</run_depend>
 
   <export>
   </export>
