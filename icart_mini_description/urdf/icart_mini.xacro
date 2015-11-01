@@ -3,21 +3,18 @@
 <robot name="icart_mini" xmlns:xacro="http://www.ros.org/wiki/xacro"> 
   <!-- Constants for robot dimensions -->
   <xacro:property name="PI" value="3.1415926535897931"/>
-  <xacro:property name="camera_link" value="0.05"/> <!-- Size of square 'camera' box -->
   <xacro:property name="hokuyo_link" value="0.1" /> <!-- Size of square 'hokuyo' box -->
 
-  <!-- Import all Gazebo-customization elements, including Gazebo colors -->
-  <xacro:include filename="$(find icart_mini_description)/urdf/icart_mini.gazebo" />
   <!-- Import Rviz colors -->
   <xacro:include filename="$(find icart_mini_description)/urdf/materials.xacro" />
 
   <!-- Used for fixing robot to Gazebo 'base_link' -->
-  <!--link name="world"/>
+  <link name="world"/>
 
   <joint name="continuous" type="continuous">
     <parent link="world"/>
     <child link="base_link"/>
-  </joint-->
+  </joint>
 
   <!-- Base Link -->
   <link name="base_link">
@@ -179,38 +176,7 @@
       <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001"/>
     </inertial>
   </link>
-  
-  <joint name="camera_joint" type="fixed">
-    <axis xyz="0 1 0" />
-    <origin xyz="0 0 0.2" rpy="0 0 0"/>
-    <parent link="base_link"/>
-    <child link="camera_link"/>
-  </joint>
-
-  <link name="camera_link">
-    <collision>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry>
-        <box size="${camera_link} ${camera_link} ${camera_link}"/>
-      </geometry>
-    </collision>
-
-    <visual>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry>
-        <box size="${camera_link} ${camera_link} ${camera_link}"/>
-      </geometry>
-      <material name="red"/>
-    </visual>
-
-    <inertial>
-      <mass value="0.0001"/>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001"/>
-    </inertial>    
-
-  </link>
- 
+   
   <transmission name="tran1">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="left_wheel_hinge">
@@ -232,5 +198,4 @@
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission>
-
 </robot>
