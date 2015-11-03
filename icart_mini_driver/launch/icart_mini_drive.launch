@@ -3,10 +3,8 @@
 <launch>
   <arg name="scan_frame"    default="/hokuyo_link"/>
   <arg name="scan_dev"      default="/dev/sensors/hokuyo_urg"/>
-  <arg name="imu_dev"       default="/dev/sensors/imu"/>
   <arg name="model"         default="$(find xacro)/xacro.py '$(find icart_mini_description)/urdf/icart_mini.xacro'"/>
   <arg name="ypspur_params" default="/usr/local/share/robot-params/icart-mini.param"/>
-  <arg name="imu_topic"     default="/icart_mini/imu" />
   
   <node name="ypspur_coordinator_bridge" pkg="icart_mini_driver" type="ypspur_coordinator_bridge" args="$(arg ypspur_params)" output="screen"/>
  
@@ -16,13 +14,7 @@
     <param name="frame_id" value="$(arg scan_frame)"/>
     <param name="port" value="$(arg scan_dev)"/>
   </node>
-
-  <node pkg="cit_adis_imu" type="imu_node" name="imu_node">
-    <remap from="imu" to="$(arg imu_topic)" />
-    <param name="port_name" value="$(arg imu_dev)"/>
-    <param name="z_axis_dir" value="-1"/>
-  </node>
-
+  
   <node name="icart_mini_driver_node" pkg="icart_mini_driver" output="screen" type="icart_mini_driver_node"/>
   
   <include file="$(find icart_mini_control)/launch/icart_mini_control.launch" />

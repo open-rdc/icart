@@ -7,14 +7,7 @@
 
   <!-- Import Rviz colors -->
   <xacro:include filename="$(find icart_mini_description)/urdf/materials.xacro" />
-
-  <!-- Used for fixing robot to Gazebo 'base_link' -->
-  <link name="world"/>
-
-  <joint name="continuous" type="continuous">
-    <parent link="world"/>
-    <child link="base_link"/>
-  </joint>
+  <xacro:include filename="$(find icart_mini_description)/urdf/icart_mini.gazebo"/>
 
   <!-- Base Link -->
   <link name="base_link">
