@@ -300,6 +300,9 @@ public:
                     if(is_stop_ && !in_stop_){
                     	ROS_INFO_STREAM("waypoint = " << *waypoints_it);
                         waypoints_.insert(waypoints_it, stop_point_);
+                        std_srvs::Empty empty;
+                        clear_costmaps_srv_.call(empty);
+
                         ROS_INFO_STREAM("Stop point received");
 			is_stop_ = false;
 			in_stop_ = true;
@@ -327,6 +330,10 @@ public:
                             sleep();
                             ROS_INFO_STREAM("Wait for restart");
                         }
+                        
+                        std_srvs::Empty empty;
+                        clear_costmaps_srv_.call(empty);
+
                         ROS_INFO_STREAM("Restart");
                         has_restart_ = false;
 			in_stop_ = false;
