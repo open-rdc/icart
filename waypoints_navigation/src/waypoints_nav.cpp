@@ -93,6 +93,8 @@ public:
     }
 
     void syscommandCallback(const std_msgs::String &msg){
+        std_srvs::Empty empty;
+        clear_costmaps_srv_.call(empty);
         if(msg.data == "start"){
             has_activate_ = true;
         }
@@ -298,11 +300,12 @@ public:
                     if(!ros::ok()) break;
                     
                     if(is_stop_ && !in_stop_){
-                    	ROS_INFO_STREAM("waypoint = " << *waypoints_it);
+                        ROS_INFO_STREAM("waypoint = " << *waypoints_it);
                         waypoints_.insert(waypoints_it, stop_point_);
+
                         ROS_INFO_STREAM("Stop point received");
-			is_stop_ = false;
-			in_stop_ = true;
+                        is_stop_ = false;
+                        in_stop_ = true;
                     }
 
                     startNavigationGL(waypoints_it->point);
@@ -311,8 +314,6 @@ public:
                         double time = ros::Time::now().toSec();
                         if(time - start_nav_time > 10.0 && time - last_moved_time_ > 10.0){
                             ROS_WARN("Resend the navigation goal.");
-                            std_srvs::Empty empty;
-                            clear_costmaps_srv_.call(empty);
                             startNavigationGL(waypoints_it->point);
                             start_nav_time = time;
                         }
@@ -322,14 +323,16 @@ public:
                     ROS_INFO("waypoint goal");
                     
                     ROS_INFO_STREAM("waypoint = " << *waypoints_it);
-		    if(!is_stop_ && in_stop_ ){
+                    if(!is_stop_ && in_stop_ ){
                         while(!has_restart_){
                             sleep();
                             ROS_INFO_STREAM("Wait for restart");
                         }
+                        
+
                         ROS_INFO_STREAM("Restart");
                         has_restart_ = false;
-			in_stop_ = false;
+                        in_stop_ = false;
                     }
                 }
                 ROS_INFO("waypoints clear");
