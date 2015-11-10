@@ -19,5 +19,5 @@ $ roslaunch icart_mini_driver teleop_joy.launch
 
 ## License
 
-Copyright (c) 2014, Robot Design and Control Lab. (BSD License)
+Copyright (c) 2014 - 2015, [Daiki Maekawa](https://github.com/DaikiMaekawa) and Chiba Institute of Technology. (BSD License)
 
