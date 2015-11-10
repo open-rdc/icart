@@ -12,7 +12,6 @@
   <run_depend>icart_mini_driver</run_depend>
   <run_depend>icart_mini_gazebo</run_depend>
   <run_depend>icart_mini_control</run_depend>
-  <run_depend>waypoints_navigation</run_depend>
 
   <export>
     <metapackage/>
