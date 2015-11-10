@@ -6,7 +6,3 @@
     uri: https://github.com/open-rdc/cit_adis_imu/
     local-name: cit_adis_imu
     version: indigo-devel
-- git:
-    uri: https://github.com/ros-controls/ros_controllers
-    local-name: ros_controllers
-    version: indigo-devel
