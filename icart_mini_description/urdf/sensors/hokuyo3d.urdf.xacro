@@ -8,10 +8,10 @@
 	      <axis xyz="1 0 0"/>
 	      <insert_block name="origin"/>
 	      <parent link="${parent}"/>
-	      <child link="${name}_link"/>
+	      <child link="${name}"/>
 	  </joint>
 	
-	  <link name="${name}_link">
+	  <link name="${name}">
 	      <inertial>
 	        <mass value="0.001"/>
 	        <origin rpy="0 0 0" xyz="0 0 0"/>
@@ -31,7 +31,7 @@
 	      </collision>
 	  </link>
 	  
-      <gazebo reference="${name}_link">
+      <gazebo reference="${name}">
         <sensor name="velodyne" type="ray">
         <always_on>true</always_on>
         <visualize>false</visualize>
@@ -61,7 +61,7 @@
           <gaussianNoise>0.02</gaussianNoise>
           <updateRate>20</updateRate>
           <topicName>/${name}/hokuyo_cloud</topicName>
-          <frameName>${name}_link</frameName>
+          <frameName>${name}</frameName>
         </plugin>
       </sensor>
     </gazebo>
