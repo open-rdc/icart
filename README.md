@@ -7,7 +7,7 @@ icart_mini
 
 ## About
 
-icart_mini packages provides i-Cart mini models, simulation environments and ypspur control bridge on ROS.
+icart packages provides robot models regarding i-Cart series, simulation environments and ypspur control bridge on ROS.
 
 ![i-Cart mini](http://wiki.ros.org/Robots/icart_mini?action=AttachFile&do=get&target=icart_mini.png)
 
