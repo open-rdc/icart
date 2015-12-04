@@ -3,7 +3,6 @@
 <robot name="icart_mini" xmlns:xacro="http://www.ros.org/wiki/xacro"> 
   <!-- Constants for robot dimensions -->
   <xacro:property name="PI" value="3.1415926535897931"/>
-  <xacro:property name="hokuyo_link" value="0.1" /> <!-- Size of square 'hokuyo' box -->
 
   <!-- Import Rviz colors -->
   <xacro:include filename="$(find icart_mini_description)/urdf/materials.xacro" />
@@ -141,35 +140,7 @@
     <limit effort="100" velocity="100.0"  lower="-5000" upper="5000" />
   </joint>
 
-  <joint name="hokuyo_joint" type="fixed">
-    <axis xyz="0 1 0"/>
-    <origin xyz="0.243 0 0.2" rpy="0 0 0"/>
-    <parent link="base_link"/>
-    <child link="hokuyo_link"/>
-  </joint>
-
-  <link name="hokuyo_link">
-    <collision>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry>
-        <box size="${hokuyo_link} ${hokuyo_link} ${hokuyo_link}"/>
-      </geometry>
-    </collision>
-
-    <visual>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry>
-        <mesh filename="package://icart_mini_description/meshes/hokuyo.dae"/>
-      </geometry>
-    </visual>
-
-    <inertial>
-      <mass value="0.0001"/>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001"/>
-    </inertial>
-  </link>
-   
+     
   <transmission name="tran1">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="left_wheel_hinge">
