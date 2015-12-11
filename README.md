@@ -1,4 +1,4 @@
-icart_mini
+icart
 =================
 
 [![Stories in Progress](https://badge.waffle.io/open-rdc/icart_mini.svg?label=in progress&title=In Progress)](http://waffle.io/open-rdc/icart_mini)
