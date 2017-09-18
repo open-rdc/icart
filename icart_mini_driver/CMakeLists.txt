@@ -14,8 +14,6 @@ catkin_package(
 #  DEPENDS system_lib
 )
 
-#include_directories(/usr/share/include)
-
 include_directories(
     ${catkin_INCLUDE_DIRS}
     ${YPSPUR_INCLUDE_DIRS}
@@ -27,7 +25,8 @@ add_executable(icart_mini_driver_node src/icart_mini_driver_node.cpp)
 
 target_link_libraries(icart_mini_driver_node
     ${catkin_LIBRARIES}
-    ${YPSPUR_LIBRARIES}
+    ${YPSPUR_LIBRARY_DIRS}
+    ${YPSPUR_LIBDIR}
 )
 
 install(FILES
