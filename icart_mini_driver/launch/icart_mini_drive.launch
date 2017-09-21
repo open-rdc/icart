@@ -15,7 +15,7 @@
   <node pkg="urg_node" type="urg_node" name="urg_node">
     <param name="frame_id" value="$(arg scan_frame)"/>
     <param name="ip_address"  value="$(arg urg_ip)" if="$(arg use_eth_urg)"/>
-    <param name="port" value="$(arg scan_dev)" unless="$(arg use_eth_urg)")/>
+    <param name="serial_port" value="$(arg scan_dev)" unless="$(arg use_eth_urg)"/>
     <param name="publish_multiecho" value="false"/>
   </node>
 
