@@ -21,7 +21,7 @@ include_directories(
     ${YPSPUR_INCLUDE_DIRS}
 )
 
-find_package(YPSpur)
+find_package(yospur)
 
 add_executable(icart_mini_driver_node src/icart_mini_driver_node.cpp)
 
