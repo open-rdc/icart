@@ -12,14 +12,10 @@
 
   <param name="robot_description" command="$(arg model)" />
 
-  <node pkg="hokuyo_node" type="hokuyo_node" name="hokuyo_node" unless="$(arg use_eth_urg)">
+  <node pkg="urg_node" type="urg_node" name="urg_node">
     <param name="frame_id" value="$(arg scan_frame)"/>
-    <param name="port" value="$(arg scan_dev)"/>
-  </node>
-
-  <node pkg="urg_node" type="urg_node" name="urg_node" if="$(arg use_eth_urg)">
-    <param name="frame_id" value="$(arg scan_frame)"/>
-    <param name="ip_address"  value="$(arg urg_ip)"/>
+    <param name="ip_address"  value="$(arg urg_ip)" if="$(arg use_eth_urg)"/>
+    <param name="serial_port" value="$(arg scan_dev)" unless="$(arg use_eth_urg)"/>
     <param name="publish_multiecho" value="false"/>
   </node>
 
