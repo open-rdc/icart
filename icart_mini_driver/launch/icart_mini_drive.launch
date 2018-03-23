@@ -17,6 +17,8 @@
     <param name="ip_address"  value="$(arg urg_ip)" if="$(arg use_eth_urg)"/>
     <param name="serial_port" value="$(arg scan_dev)" unless="$(arg use_eth_urg)"/>
     <param name="publish_multiecho" value="false"/>
+	<param name="angle_min" value="-1.57"/>
+	<param name="angle_max" value="1.57"/>
   </node>
 
   <node name="icart_mini_driver_node" pkg="icart_mini_driver" output="screen" type="icart_mini_driver_node"/>
