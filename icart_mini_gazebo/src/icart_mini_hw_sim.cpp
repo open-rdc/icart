@@ -117,20 +117,22 @@ namespace icart_mini_gazebo
 
         void writeSim(ros::Time time, ros::Duration period){
             for(int i=0; i < 2; i++){
-                joint_[i]->SetParam("vel", 0, cmd_[i]);
-                joint_[i]->SetParam("max_velocity", 0, max_drive_joint_torque_);
+				joint_[i]->SetVelocity(0, cmd_[i]);
+				joint_[i]->SetVelocityLimit(0, max_drive_joint_torque_);
             }
             
+            
             /*
-            if(safety_interface_.get_state() == safety_interface::safety_state::OK){
+			if(safety_interface_.get_state() == safety_interface::safety_state::OK){
                 for(int i=0; i < 2; i++){
-                    joint_[i]->SetVelocity(0, cmd_[i]);
-                    joint_[i]->SetMaxForce(0, max_drive_joint_torque_);
+                    //joint_[i]->SetVelocity(0, cmd_[i]);
+                    //joint_[i]->SetMaxForce(0, max_drive_joint_torque_);
                 }
             }else{
                 for(int i=0; i < 2; i++) joint_[i]->SetVelocity(0, 0);
             }
-            */
+			*/
+            
         }
     };
 
