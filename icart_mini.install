@@ -6,3 +6,7 @@
     uri: https://github.com/open-rdc/cit_adis_imu/
     local-name: cit_adis_imu
     version: indigo-devel
+- git:
+    uri: https://github.com/DaikiMaekawa/ypspur/
+    local-name: ypspur
+    version: indigo-devel
