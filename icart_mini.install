@@ -1,7 +1,7 @@
 - git:
     uri: https://github.com/open-rdc/icart_mini
     local-name: icart_mini
-    version: indigo-devel
+    version: melodic-devel
 - git:
     uri: https://github.com/open-rdc/cit_adis_imu/
     local-name: cit_adis_imu
