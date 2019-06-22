@@ -52,7 +52,7 @@ namespace icart_mini_gazebo
     class ICartMiniHWSim : public gazebo_ros_control::RobotHWSim
     {
     private:
-        constexpr static const double max_drive_joint_torque_ = 20.0;
+        double max_drive_joint_torque_ = 20.0;
         
         double cmd_[2];
         double pos_[2];
