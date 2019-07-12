@@ -9,7 +9,7 @@ icart_mini:
     right_wheel : 'right_wheel_hinge'
     publish_rate: 100
     
-    enable_odom_tf: true
+    enable_odom_tf: false
     
     pose_covariance_diagonal : [0.00001, 0.00001, 1000000000000.0, 1000000000000.0, 1000000000000.0, 0.001]
     twist_covariance_diagonal: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
