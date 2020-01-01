@@ -52,7 +52,7 @@ namespace icart_mini_gazebo
     class ICartMiniHWSim : public gazebo_ros_control::RobotHWSim
     {
     private:
-        double max_drive_joint_torque_ = 20.0;
+        double max_drive_joint_torque_ = 1.0;
         
         double cmd_[2];
         double pos_[2];
@@ -109,7 +109,7 @@ namespace icart_mini_gazebo
 
         void readSim(ros::Time time, ros::Duration period){
             for(int i=0; i < 2; i++){
-                pos_[i] += angles::shortest_angular_distance(pos_[i], joint_[i]->Position(0)*M_PI/180);
+                pos_[i] = joint_[i]->Position(0);
                 vel_[i] = joint_[i]->GetVelocity(0);
                 eff_[i] = joint_[i]->GetForce((unsigned int)(0));
             }
