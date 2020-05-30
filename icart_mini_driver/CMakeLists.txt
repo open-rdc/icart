@@ -7,6 +7,8 @@ find_package(catkin REQUIRED COMPONENTS
     controller_manager
 )
 
+find_package(ypspur REQUIRED)
+
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES icart_mini_driver
@@ -14,20 +16,16 @@ catkin_package(
 #  DEPENDS system_lib
 )
 
-#include_directories(/usr/share/include)
-
 include_directories(
     ${catkin_INCLUDE_DIRS}
     ${YPSPUR_INCLUDE_DIRS}
 )
 
-find_package(YPSpur)
-
 add_executable(icart_mini_driver_node src/icart_mini_driver_node.cpp)
 
 target_link_libraries(icart_mini_driver_node
     ${catkin_LIBRARIES}
-    ${YPSPUR_LIBRARIES}
+    ypspur${TARGET_STATIC_POSTFIX}
 )
 
 install(FILES
