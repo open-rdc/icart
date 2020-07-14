@@ -7,7 +7,7 @@ find_package(catkin REQUIRED COMPONENTS
     controller_manager
 )
 
-find_package(ypspur REQUIRED)
+find_package(ypspur 1.17.0 REQUIRED)
 
 catkin_package(
 #  INCLUDE_DIRS include
@@ -18,14 +18,14 @@ catkin_package(
 
 include_directories(
     ${catkin_INCLUDE_DIRS}
-    ${YPSPUR_INCLUDE_DIRS}
+    ${ypspur_INCLUDE_DIRS}
 )
 
 add_executable(icart_mini_driver_node src/icart_mini_driver_node.cpp)
 
 target_link_libraries(icart_mini_driver_node
     ${catkin_LIBRARIES}
-    ypspur${TARGET_STATIC_POSTFIX}
+    ypspur
 )
 
 install(FILES
