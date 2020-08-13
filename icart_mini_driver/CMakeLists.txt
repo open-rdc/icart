@@ -15,19 +15,18 @@ catkin_package(
 )
 
 #include_directories(/usr/share/include)
+find_package(ypspur 1.17.0 REQUIRED)
 
 include_directories(
     ${catkin_INCLUDE_DIRS}
-    ${YPSPUR_INCLUDE_DIRS}
+    ${ypspur_INCLUDE_DIRS}
 )
-
-find_package(ypspur)
 
 add_executable(icart_mini_driver_node src/icart_mini_driver_node.cpp)
 
 target_link_libraries(icart_mini_driver_node
     ${catkin_LIBRARIES}
-    ${YPSPUR_LIBRARIES}
+    ypspur
 )
 
 install(FILES
