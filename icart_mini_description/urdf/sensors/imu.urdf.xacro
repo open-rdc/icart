@@ -38,6 +38,7 @@
             <topicName>imu_data</topicName>
             <serviceName>imu_service</serviceName>
             <gaussianNoise>0.005</gaussianNoise>
+	    <updateRate>100.0</updateRate>
         </plugin>
       </gazebo>
   </xacro:macro>
