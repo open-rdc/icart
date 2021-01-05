@@ -1,8 +1,9 @@
 - git:
     uri: https://github.com/open-rdc/icart_mini
     local-name: icart_mini
-    version: indigo-devel
+    version: kinetic-devel
 - git:
-    uri: https://github.com/open-rdc/cit_adis_imu/
-    local-name: cit_adis_imu
-    version: indigo-devel
+    uri: https://github.com/open-rdc/ypspur/
+    local-name: ypspur
+    version: kinetic-devel
+
