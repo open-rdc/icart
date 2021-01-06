@@ -5,23 +5,16 @@ find_package(catkin REQUIRED COMPONENTS
     roscpp 
     hardware_interface
     controller_manager
+    ypspur
 )
 
 catkin_package(
-#  INCLUDE_DIRS include
-#  LIBRARIES icart_mini_driver
-#  CATKIN_DEPENDS other_catkin_pkg
-#  DEPENDS system_lib
 )
-
-#include_directories(/usr/share/include)
 
 include_directories(
     ${catkin_INCLUDE_DIRS}
     ${YPSPUR_INCLUDE_DIRS}
 )
-
-find_package(ypspur)
 
 add_executable(icart_mini_driver_node src/icart_mini_driver_node.cpp)
 
