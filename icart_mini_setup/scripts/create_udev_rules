@@ -6,7 +6,7 @@ echo ""
 echo "Bring up the usb modules connection"
 echo ""
 
-cp `rospack find icart_mini_setup`/config/70-sensors.rules /etc/udev/rules.d
+sudo cp `rospack find icart_mini_setup`/config/70-sensors.rules /etc/udev/rules.d
 
 echo ""
 echo "Restarting udev"
