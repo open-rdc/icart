@@ -1,10 +1,6 @@
 icart
 =================
 
-[![Stories in Progress](https://badge.waffle.io/open-rdc/icart_mini.svg?label=in progress&title=In Progress)](http://waffle.io/open-rdc/icart_mini)
-
-[![Throughput Graph](https://graphs.waffle.io/open-rdc/icart_mini/throughput.svg)](https://waffle.io/open-rdc/icart_mini/metrics) 
-
 ## About
 
 icart packages provides robot models regarding i-Cart series, simulation environments and ypspur control bridge on ROS.
@@ -32,7 +28,7 @@ cd ~/catkin_ws
 catkin build
 ```
 
-### parameter
+### set parameters
 ```
 cd ~/catkin_ws/src/icart/icart_mini_setup/scripts
 ./create_robot_params
