@@ -8,7 +8,7 @@
   <arg name="debug" default="false"/>
   
   <!-- Load the URDF into the ROS Parameter Server -->
-  <arg name="model" default="$(find xacro)/xacro.py '$(find icart_mini_description)/urdf/icart_mini.xacro'" />
+  <arg name="model" default="$(find xacro)/xacro '$(find icart_mini_description)/urdf/icart_mini.xacro'" />
   <arg name="world" default="$(find icart_mini_gazebo)/worlds/empty.world"/>
 
   <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
