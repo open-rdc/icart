@@ -29,6 +29,13 @@ catkin build
 ```
 
 ### set parameters
+
+modify parameters if you need
+```
+cd ~/catkin_ws/src/icart/icart_mini_setup/config
+vi icart-mini.param
+```
+
 ```
 cd ~/catkin_ws/src/icart/icart_mini_setup/scripts
 ./create_robot_params
