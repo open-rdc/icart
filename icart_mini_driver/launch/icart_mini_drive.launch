@@ -10,7 +10,7 @@
   <arg name="scan_dev"            default="/dev/sensors/hokuyo_urg" unless="$(arg use_eth_urg)"/>
 
   <node name="ypspur_coordinator_bridge" pkg="icart_mini_driver" type="ypspur_coordinator_bridge" args="$(arg ypspur_params)" output="screen"/>
-<!--
+
   <param name="robot_description" command="$(arg model)" />
 
   <node pkg="urg_node" type="urg_node" name="urg_node">
@@ -23,8 +23,8 @@
     <param name="angle_max" value="1.57"/>
   </node>
 
-  <node name="icart_mini_driver_node" pkg="icart_mini_driver" output="screen" type="icart_mini_driver_node"/>
+  <node name="icart_mini_driver_node" pkg="icart_mini_driver" output="screen" type="icart_mini_driver_node" launch-prefix="bash -c 'sleep 1.0; $0 $@'"/>
   
   <include file="$(find icart_mini_control)/launch/icart_mini_control.launch" />
--->
+
 </launch>
